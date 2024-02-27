@@ -5,7 +5,6 @@
     <!-- Navigation -->
     <?php include "includes/admin_navigation.php" ?>
 
-
     <div id="page-wrapper">
 
         <div class="container-fluid">
@@ -55,6 +54,17 @@
                                 <input class="btn btn-primary" type="submit" name="submit" value="Submit">
                             </div>
                         </form>
+
+                        <?php
+
+                        if (isset($_GET['edit'])) {
+
+                            $cat_id = $_GET['edit'];
+                            include "includes/edit_category.php";
+                        }
+
+                        ?>
+
                     </div>
                     <div class="col-xs-6">
                         <table class="table table-bordered table-hover">
@@ -66,7 +76,7 @@
                             </thead>
                             <tbody>
 
-                                <?php 
+                                <?php
                                 //FIND ALL CATEGORIES
 
                                 $query = "SELECT * FROM categories";
@@ -81,11 +91,12 @@
                                     echo "<td>{$cat_id}</td>";
                                     echo "<td>{$cat_title}</td>";
                                     echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
+                                    echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>";
                                     echo "</tr>";
                                 }
                                 ?>
 
-                                <?php 
+                                <?php
                                 // DELETE CATEGORY
 
                                 if (isset($_GET['delete'])) {
