@@ -23,6 +23,7 @@ if (isset($_POST['create_post'])) {
     $new_post = mysqli_query($connection, $query);
 
     queryTest($new_post);
+    header("Location: posts.php");
 }
 
 ?>
@@ -32,10 +33,31 @@ if (isset($_POST['create_post'])) {
         <label for="post_title">Post Title</label>
         <input type="text" class="form-control" name="post_title">
     </div>
+    <!-- category dropdown -->
     <div class="form-group">
-        <label for="post_category">Category Id</label>
-        <input type="text" class="form-control" name="post_category_id">
+        <label for="post_category_id">Category Id</label><br>
+        <select name="post_category_id" id="post_category_id">
+
+            <?php
+
+            $query = "SELECT * FROM categories";
+            $all_categories = mysqli_query($connection, $query);
+
+            queryTest($all_categories);
+
+            while ($row = mysqli_fetch_assoc($all_categories)) {
+
+                $cat_id = $row['cat_id'];
+                $cat_title = $row['cat_title'];
+
+                echo "<option value='$cat_id'>{$cat_title}</option>";
+            }
+
+            ?>
+
+        </select>
     </div>
+
     <div class="form-group">
         <label for="post_author">Author</label>
         <input type="text" class="form-control" name="post_author">

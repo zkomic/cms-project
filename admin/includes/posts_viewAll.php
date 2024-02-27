@@ -41,14 +41,14 @@
             $query = "SELECT * FROM categories WHERE cat_id = {$post_category_id}";
             $category_display = mysqli_query($connection, $query);
 
-            //queryTest($category_display);
+            queryTest($category_display);
 
             while ($row = mysqli_fetch_assoc($category_display)) {
 
                 $cat_id = $row['cat_id'];
                 $cat_title = $row['cat_title'];
 
-                //echo "<td>{$cat_title}</td>";
+                echo "<td>{$cat_title}</td>";
             }
 
             echo "<td>{$post_status}</td>";
