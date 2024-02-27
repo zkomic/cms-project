@@ -30,8 +30,8 @@
                             include "includes/posts_newPost.php";
                             break;
 
-                        case '35';
-                            echo "NICE100";
+                        case 'edit_post';
+                            include "includes/posts_editPost.php";
                             break;
 
                         default:

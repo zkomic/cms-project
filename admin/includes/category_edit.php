@@ -11,6 +11,8 @@
             $query = "SELECT * FROM categories WHERE cat_id = $cat_id";
             $edit_category = mysqli_query($connection, $query);
 
+            queryTest($edit_category);
+
             while ($row = mysqli_fetch_assoc($edit_category)) {
 
                 $cat_id = $row['cat_id'];
@@ -38,9 +40,7 @@
             $update_category = mysqli_query($connection, $query);
             header("Location: categories.php");
 
-            if (!$update_category) {
-                die("Query failed: " . mysqli_error($connection));
-            }
+            queryTest($update_category);
         }
 
         ?>
