@@ -40,7 +40,7 @@
                         <a href="./posts.php">All Posts</a>
                     </li>
                     <li>
-                        <a href="#">New Post</a>
+                        <a href="./posts.php?source=add_post">New Post</a>
                     </li>
                 </ul>
             </li>

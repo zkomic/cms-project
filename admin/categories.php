@@ -37,7 +37,7 @@
                         if (isset($_GET['edit'])) {
 
                             $cat_id = $_GET['edit'];
-                            include "includes/edit_category.php";
+                            include "includes/category_edit.php";
                         }
 
                         ?>
