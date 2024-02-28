@@ -15,7 +15,7 @@
             $posts = mysqli_query($connection, $query);
             queryTest($posts);
 
-            if (mysqli_num_rows($posts) == 0) {
+            if (mysqli_num_rows($posts) == 0) { // checking if there are published posts
 
                 echo "<h1 class='text-center' >No posts, sorry.</h1><br>";
             } else {
