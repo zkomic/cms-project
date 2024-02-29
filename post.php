@@ -65,18 +65,25 @@
                 $comment_email = $_POST['comment_email'];
                 $comment_content = $_POST['comment_content'];
 
-                $query = "INSERT INTO comments ";
-                $query .= "(comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
-                $query .= "VALUES ($p_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now())";
+                if (!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
 
-                $new_comment = mysqli_query($connection, $query);
-                queryTest($new_comment);
+                    $query = "INSERT INTO comments ";
+                    $query .= "(comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
+                    $query .= "VALUES ($p_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now())";
 
-                //increase comment count
-                $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
-                $query .= "WHERE post_id = {$p_id}";
-                $comment_count_increment = mysqli_query($connection, $query);
-                queryTest($comment_count_increment);
+                    $new_comment = mysqli_query($connection, $query);
+                    queryTest($new_comment);
+
+                    //increase comment count
+                    $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
+                    $query .= "WHERE post_id = {$p_id}";
+                    $comment_count_increment = mysqli_query($connection, $query);
+                    queryTest($comment_count_increment);
+                }
+                else {
+
+                    echo "<script>alert('Fields can not be empty.')</script>";
+                }
             }
 
             ?>

@@ -22,7 +22,17 @@ if (isset($_POST['create_post'])) {
     $new_post = mysqli_query($connection, $query);
 
     queryTest($new_post);
-    header("Location: posts.php");
+    //header("Location: posts.php");
+
+    //last id
+    $p_id = mysqli_insert_id($connection); 
+
+    echo "
+    <div class='alert alert-success'>
+        Post created succesfully!<br>
+        Click here to <a href='../post.php?p_id={$p_id}'> see post </a> or here to <a href='posts.php'> view all posts.</a>
+    </div>";
+
 }
 
 ?>
@@ -62,8 +72,11 @@ if (isset($_POST['create_post'])) {
         <input type="text" class="form-control" name="post_author">
     </div>
     <div class="form-group">
-        <label for="post_status">Status</label>
-        <input type="text" class="form-control" name="post_status">
+        <label for="post_status">Status</label><br>
+        <select name="post_status" id="post_status">
+            <option value="draft">Draft</option>
+            <option value="published">Published</option>
+        </select>
     </div>
     <div class="from-group">
         <label for="post_image">Image</label>
