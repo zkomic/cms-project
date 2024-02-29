@@ -21,7 +21,14 @@ if (isset($_POST['create_user'])) {
     $new_user = mysqli_query($connection, $query);
 
     queryTest($new_user);
-    header("Location: users.php");
+    //header("Location: users.php");
+
+    echo "
+    <div class='alert alert-success'>User 
+        <strong>{$username}</strong>
+    created succesfully!
+        <a href='users.php'>Click here to view all users.</a>
+  </div>";
 }
 
 ?>
