@@ -54,7 +54,6 @@
                             <tbody>
 
                                 <?php findAllCategories(); ?>
-
                                 <?php deleteCategory(); ?>
 
                             </tbody>
