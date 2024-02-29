@@ -106,25 +106,42 @@ if (isset($_POST['submit'])) {
         <input type="text" class="form-control" name="post_author" value="<?php echo $post_author; ?>">
     </div>
     <div class="form-group">
-        <label for="post_status">Status</label>
-        <input type="text" class="form-control" name="post_status" value="<?php echo $post_status; ?>">
+        <label for="post_status">Status</label><br>
+        <select name="post_status" id="post_status">
+
+            <?php
+
+            if ($post_status == 'draft') {
+
+                echo "<option value='draft' selected='selected'>Draft</option>";
+                echo "<option value='published'>Published</option>";
+            } else {
+
+                echo "<option value='published' selected='selected'>Published</option>";
+                echo "<option value='draft' >Draft</option>";
+            }
+
+            ?>
+
+        </select>
     </div>
-    <div class="from-group">
-        <label for="post_image">Image</label><br>
-        <img width=200 src="../images/<?php echo $post_image; ?>" alt=""><br><br>
-        <input type="file" name="post_image">
-    </div>
-    <br>
     <div class="form-group">
-        <label for="post_tags">Tags</label>
-        <input type="text" class="form-control" name="post_tags" value="<?php echo $post_tags; ?>">
-    </div>
-    <div class="post-group">
-        <label for="post_content">Content</label>
-        <textarea class="form-control" name="post_content" id="" cols="30" rows="10"><?php echo $post_content; ?></textarea>
-    </div>
-    <br>
-    <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="submit" value="Update Post">
-    </div>
+        <div class="from-group">
+            <label for="post_image">Image</label><br>
+            <img width=200 src="../images/<?php echo $post_image; ?>" alt=""><br><br>
+            <input type="file" name="post_image">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="post_tags">Tags</label>
+            <input type="text" class="form-control" name="post_tags" value="<?php echo $post_tags; ?>">
+        </div>
+        <div class="post-group">
+            <label for="post_content">Content</label>
+            <textarea class="form-control" name="post_content" id="" cols="30" rows="10"><?php echo $post_content; ?></textarea>
+        </div>
+        <br>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" name="submit" value="Update Post">
+        </div>
 </form>

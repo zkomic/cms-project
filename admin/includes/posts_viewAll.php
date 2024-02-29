@@ -51,7 +51,13 @@
                 echo "<td>{$cat_title}</td>";
             }
 
-            echo "<td>{$post_status}</td>";
+            if ($post_status == 'published') {
+
+                echo "<td>Published</td>";
+            } else {
+
+                echo "<td>Draft</td>";
+            }
             echo "<td><img width='100' src='../images/$post_image' alt='image'></td>";
             echo "<td>{$post_tags}</td>";
             echo "<td>{$post_comment_count}</td>";
