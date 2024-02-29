@@ -59,7 +59,13 @@ if (isset($_POST['submit'])) {
 
     $update_post = mysqli_query($connection, $query);
     queryTest($update_post);
-    header("Location: posts.php");
+    //header("Location: posts.php");
+
+    echo "
+    <div class='alert alert-success'>
+        Post updated succesfully!<br>
+        Click here for <a href='../post.php?p_id={$p_id}'> edited post </a> or here to <a href='posts.php'> edit other posts.</a>
+    </div>";
 }
 
 ?>
