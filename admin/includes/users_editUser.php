@@ -47,6 +47,13 @@ if (isset($_POST['edit_user'])) {
     //     }
     // }
 
+    $query = "SELECT randSalt FROM users";
+    $randSalt = mysqli_query($connection, $query);
+    queryTest($randSalt);
+    $row = mysqli_fetch_array($randSalt);
+    $salt = $row['randSalt'];
+    $hash_password = crypt($user_password, $salt);
+
 
     $query = "UPDATE users SET ";
     $query .= "user_firstname = '{$user_firstname}', ";
@@ -54,7 +61,7 @@ if (isset($_POST['edit_user'])) {
     $query .= "user_role = '{$user_role}', ";
     $query .= "username = '{$username}', ";
     $query .= "user_email = '{$user_email}', ";
-    $query .= "user_password = '{$user_password}' ";
+    $query .= "user_password = '{$hash_password}' ";
     //$query .= "post_image = '{$post_image}' ";
     $query .= "WHERE user_id = {$user_id} ";
 
@@ -104,7 +111,7 @@ if (isset($_POST['edit_user'])) {
     </div>
     <div class="form-group">
         <label for="user_password">Password</label>
-        <input type="text" class="form-control" name="user_password" value="<?php echo $user_password ?>">
+        <input type="password" class="form-control" name="user_password" value="<?php echo $user_password ?>">
     </div>
     <!-- <div class="from-group">
         <label for="post_image">Image</label>
