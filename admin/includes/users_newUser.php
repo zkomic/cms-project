@@ -15,8 +15,10 @@ if (isset($_POST['create_user'])) {
     //$post_image_tmp = $_FILES['post_image']['tmp_name']; //tmp location
     //move_uploaded_file($post_image_tmp, "../images/$post_image"); //moving img from tmp location to ../images
 
+    echo $password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));
+
     $query = "INSERT INTO users(user_firstname, user_lastname, user_role, username, user_email, user_password) ";
-    $query .= "VALUES('{$user_firstname}','{$user_lastname}','{$user_role}','{$username}','{$user_email}','{$user_password}')";
+    $query .= "VALUES('{$user_firstname}','{$user_lastname}','{$user_role}','{$username}','{$user_email}','{$password}')";
 
     $new_user = mysqli_query($connection, $query);
 

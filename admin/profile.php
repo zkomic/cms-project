@@ -18,7 +18,6 @@ if (isset($_SESSION['username'])) {
         $user_lastname = $row['user_lastname'];
         $user_email = $row['user_email'];
         //$user_image = $row['user_image'];
-        $user_role = $row['user_role'];
     }
 }
 
@@ -30,7 +29,6 @@ if (isset($_POST['edit_user'])) {
 
     $user_firstname = $_POST['user_firstname'];
     $user_lastname = $_POST['user_lastname'];
-    $user_role = $_POST['user_role'];
     $username = $_POST['username'];
     $user_email = $_POST['user_email'];
     $user_password = $_POST['user_password'];
@@ -56,7 +54,6 @@ if (isset($_POST['edit_user'])) {
     $query = "UPDATE users SET ";
     $query .= "user_firstname = '{$user_firstname}', ";
     $query .= "user_lastname = '{$user_lastname}', ";
-    $query .= "user_role = '{$user_role}', ";
     $query .= "username = '{$username}', ";
     $query .= "user_email = '{$user_email}', ";
     $query .= "user_password = '{$user_password}' ";
@@ -100,26 +97,6 @@ if (isset($_POST['edit_user'])) {
                             <input type="text" class="form-control" name="user_lastname" value="<?php echo $user_lastname ?>">
                         </div>
                         <div class="form-group">
-                            <label for="user_role">Role</label><br>
-                            <select name="user_role" id="user_role">
-
-                                <?php
-
-                                if ($user_role == 'admin') {
-
-                                    echo "<option value='admin' selected='selected'>Admin</option>";
-                                    echo "<option value='subscriber' >Subscriber</option>";
-                                } else {
-
-                                    echo "<option value='admin'>Admin</option>";
-                                    echo "<option value='subscriber' selected='selected'>Subscriber</option>";
-                                }
-
-                                ?>
-
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" class="form-control" name="username" value="<?php echo $username ?>">
                         </div>
@@ -129,7 +106,7 @@ if (isset($_POST['edit_user'])) {
                         </div>
                         <div class="form-group">
                             <label for="user_password">Password</label>
-                            <input type="text" class="form-control" name="user_password" value="<?php echo $user_password ?>">
+                            <input type="text" class="form-control" name="user_password" autocomplete="off" placeholder="New password...">
                         </div>
                         <!-- <div class="from-group">
         <label for="post_image">Image</label>

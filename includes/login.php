@@ -18,16 +18,15 @@ if (isset($_POST['login'])) {
     while ($row = mysqli_fetch_assoc($login_user)) {
 
         $db_id = $row['user_id'];
-        $db_firstname = $row['user_firstname'];
+        echo $db_firstname = $row['user_firstname'];
         $db_lastname = $row['user_lastname'];
         $db_username = $row['username'];
-        $db_password = $row['user_password'];
+        echo $db_password = $row['user_password'];
         $db_role = $row['user_role'];
     }
 
-    $password = crypt($password, $db_password);
-
-    if ($username === $db_username && $password === $db_password) {
+    // https://www.php.net/manual/en/function.password-verify.php
+    if (password_verify($password, $db_password)) {
 
         $_SESSION['username'] = $db_username;
         $_SESSION['firstname'] = $db_firstname;
@@ -35,8 +34,8 @@ if (isset($_POST['login'])) {
         $_SESSION['role'] = $db_role;
 
         header("Location: ../admin");
-    } else {
-
+    }
+    else {
         header("Location: ../index.php");
     }
 }
