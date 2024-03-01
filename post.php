@@ -90,7 +90,12 @@
 
                     echo "<script>alert('Fields can not be empty.')</script>";
                 }
+
+                // removes data when reloading after submit
+                header("Location: post.php?p_id=$post_id");
             }
+
+
 
             ?>
 
