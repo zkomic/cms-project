@@ -97,7 +97,6 @@ if (isset($_POST['checkBoxArray'])) {
                 $post_status = $row['post_status'];
                 $post_image = $row['post_image'];
                 $post_tags = $row['post_tags'];
-                $post_comment_count = $row['post_comment_count'];
                 $post_date = $row['post_date'];
                 $post_views_count = $row['post_views_count'];
 
@@ -136,7 +135,34 @@ if (isset($_POST['checkBoxArray'])) {
                 }
                 echo "<td><img width='100' src='../images/$post_image' alt='image'></td>";
                 echo "<td>{$post_tags}</td>";
-                echo "<td>{$post_comment_count}</td>";
+
+                // comment counter
+                $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
+                $comment_count_query = mysqli_query($connection, $query);
+                queryTest($comment_count_query);
+                $comment_count = mysqli_num_rows($comment_count_query);
+
+                // comment_id fetch
+                $row = mysqli_fetch_array($comment_count_query);
+                if ($row !== null) {
+                    if (is_null($row['comment_id'])) {
+                        $comment_id = 0;
+                    } else {
+                        $comment_id = $row['comment_id'];
+                    }
+                } else {
+                    $comment_id = 0;
+                }
+
+                if ($comment_count == 0) {
+
+                    echo "<td>{$comment_count}</td>";
+                } else {
+
+                    echo "<td><a href='comment.php?id=$comment_id'>{$comment_count}</a></td>";
+                }
+
+
                 echo "<td>{$post_views_count}</td>";
                 echo "<td>{$post_date}</td>";
                 echo "<td><a class='icons' href='../post.php?p_id={$post_id}'><i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;</a>";
