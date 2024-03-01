@@ -11,6 +11,10 @@
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
+        <li>
+            <!--<a href="#"><i class="fa fa-circle" style="color: #63E6BE;"></i>&nbsp;Online Users: <?php echo usersOnline(); ?></a>-->
+            <a href="#"><i class="fa fa-circle" style="color: #63E6BE;"></i>&nbsp;Online Users: <span class="usersOnline"></span></a>
+        </li>
         <li><a href="../index.php">Home Page</a></li>
         <li class="dropdown">
 

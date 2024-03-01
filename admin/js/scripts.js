@@ -25,3 +25,13 @@ $(document).ready(function () {
       $(this).remove();
     });
 });
+
+function loadUsersOnline() {
+  $.get("functions.php?onlineUsers=result", function (data) {
+    $(".usersOnline").text(data);
+  });
+}
+
+setInterval(function () {
+  loadUsersOnline();
+}, 500);//milisec

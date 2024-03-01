@@ -1,5 +1,41 @@
 <?php
 
+function usersOnline()
+{
+
+    if (isset($_GET['onlineUsers'])) {
+
+        global $connection;
+        if (!$connection) {
+
+            session_start();
+            include("../includes/db.php"); //zbog $connection
+
+            $session = session_id();
+            $time = time();
+
+            $query = "SELECT * FROM users_online WHERE session = '$session'";
+            $online_query = mysqli_query($connection, $query);
+            queryTest($online_query);
+            $online_count = mysqli_num_rows($online_query);
+
+            if ($online_count == NULL) {
+
+                mysqli_query($connection, "INSERT INTO users_online (session, time) VALUES ('$session', '$time')");
+            } else {
+
+                mysqli_query($connection, "UPDATE users_online SET time = '$time' WHERE session = '$session'");
+            }
+
+            $time_out_inseconds = 30;
+            $time_out = $time - $time_out_inseconds;
+            $users_online = mysqli_query($connection, "SELECT * FROM users_online WHERE time > '$time_out'");
+            echo $users_online_count = mysqli_num_rows($users_online);
+        }
+    } // get request 
+}
+usersOnline();
+
 function queryTest($result)
 {
 
