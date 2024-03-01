@@ -17,6 +17,28 @@ if (isset($_POST['checkBoxArray'])) {
                 $update_to_draft = mysqli_query($connection, $query);
                 queryTest($update_to_draft);
                 break;
+            case 'clone':
+                $query  = "SELECT * FROM posts WHERE post_id = {$postValueId}";
+                $post_to_clone = mysqli_query($connection, $query);
+                queryTest($post_to_clone);
+
+                while ($row = mysqli_fetch_assoc($post_to_clone)) {
+
+                    $post_title = $row['post_title'];
+                    $post_category_id = $row['post_category_id'];
+                    $post_date = $row['post_date'];
+                    $post_author = $row['post_author'];
+                    $post_status = $row['post_status'];
+                    $post_image = $row['post_image'];
+                    $post_tags = $row['post_tags'];
+                    $post_content = $row['post_content'];
+                }
+
+                $query = "INSERT INTO posts (post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) ";
+                $query .= "VALUES ({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_status}')";
+                $cloned_post = mysqli_query($connection, $query);
+                queryTest($cloned_post);
+                break;
             case 'delete':
                 $query = "DELETE FROM posts WHERE post_id = {$postValueId}";
                 $delete = mysqli_query($connection, $query);
@@ -33,8 +55,9 @@ if (isset($_POST['checkBoxArray'])) {
         <div class="col-xs-4" id="bulkOptionsContainer">
             <select name="bulk_options" id="" class="form-control">
                 <option value="">Select Option</option>
-                <option value="published">Publish</option>
-                <option value="draft">Draft</option>
+                <option value="published">Status to Published</option>
+                <option value="draft">Status to Draft</option>
+                <option value="clone">Clone</option>
                 <option value="delete">Delete</option>
             </select>
         </div>
@@ -53,14 +76,14 @@ if (isset($_POST['checkBoxArray'])) {
                 <th>Image</th>
                 <th>Tags</th>
                 <th>Comments</th>
-                <th>Date</th>             
+                <th>Date</th>
             </tr>
         </thead>
         <tbody>
 
             <?php
 
-            $query = "SELECT * FROM posts";
+            $query = "SELECT * FROM posts ORDER BY post_id DESC";
             //$query = "SELECT * FROM categories LIMIT 2";
             $posts = mysqli_query($connection, $query);
 
