@@ -231,3 +231,9 @@ ul.alert-dropdown {
 #bulkOptionsContainerButtons {
     padding-left: 5px;
 }
+
+a.icons {
+    all: unset;
+    text-decoration: none;
+    cursor: pointer;
+}

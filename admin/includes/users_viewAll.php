@@ -7,7 +7,7 @@
             <th>Last name</th>
             <th>E-mail</th>
             <th>Role</th>
-            <th></th>
+            <th>Change role</th>
         </tr>
     </thead>
     <tbody>
@@ -46,11 +46,15 @@
 
             //     echo "<td><a href='../post.php?p_id=$post_id'>{$post_title}</a></td>";
             // }
+            if($user_role === 'admin') {
 
-            echo "<td><a href='users.php?change_to_admin={$user_id}'>Make admin</a></td>";
-            echo "<td><a href='users.php?change_to_subsc={$user_id}'>Make subscriber</a></td>";
-            echo "<td><a href='users.php?source=edit_user&user_id={$user_id}'>Edit</a></td>";
-            echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this user?'); \" href='users.php?delete={$user_id}'>Delete</a></td>";
+                echo "<td><a href='users.php?change_to_subsc={$user_id}'>Make subscriber</a></td>";
+            } else {
+
+                echo "<td><a href='users.php?change_to_admin={$user_id}'>Make admin</a></td>";
+            }
+            echo "<td><a class='icons' href='users.php?source=edit_user&user_id={$user_id}'><i class='fa fa-edit'></i>&nbsp;&nbsp;</a>";
+            echo "<a class='icons' onClick=\"javascript: return confirm('Are you sure you want to delete this user?'); \" href='users.php?delete={$user_id}'><i class='fa fa-trash'></i></a></td>";
             echo "</tr>";
         }
 
