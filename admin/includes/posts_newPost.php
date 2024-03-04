@@ -1,3 +1,7 @@
+<br>
+<small>New Post</small>
+</h1>
+
 <?php
 
 if (isset($_POST['create_post'])) {

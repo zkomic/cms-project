@@ -1,3 +1,7 @@
+<br>
+<small>Edit Post</small>
+</h1>
+
 <?php
 
 if (isset($_GET['p_id'])) {

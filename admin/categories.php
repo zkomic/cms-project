@@ -1,5 +1,14 @@
 <?php include "includes/admin_header.php" ?>
 
+<?php
+
+if (!isAdmin($_SESSION['username'])) {
+
+    header("Location: profile.php");
+}
+
+?>
+
 <div id="wrapper">
 
     <!-- Navigation -->
@@ -13,10 +22,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Welcome to Admin
-                        <small>Author</small>
+                        Categories
                     </h1>
-
                     <div class="col-xs-6">
 
                         <?php newCategory(); ?>

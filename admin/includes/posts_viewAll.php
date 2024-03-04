@@ -1,3 +1,5 @@
+</h1>
+
 <?php
 
 include "delete_modal.php";

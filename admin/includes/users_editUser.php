@@ -1,3 +1,7 @@
+<br>
+<small>Edit User</small>
+</h1>
+
 <?php
 
 if (isset($_GET['user_id'])) {

@@ -1,3 +1,7 @@
+<br>
+<small>New User</small>
+</h1>
+
 <?php
 
 if (isset($_POST['create_user'])) {

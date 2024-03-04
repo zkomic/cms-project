@@ -22,20 +22,35 @@
 
             if (isset($_SESSION['username'])) {
 
-                $firstname = $_SESSION['firstname'];
-                $lastname = $_SESSION['lastname'];
+                $username = $_SESSION['username'];
+                $query = "SELECT * FROM users WHERE username = '{$username}'";
+                $logged_user = mysqli_query($connection, $query);
+                queryTest($logged_user);
+
+                while ($row = mysqli_fetch_assoc($logged_user)) {
+
+                    $firstname = $row['user_firstname'];
+                    $lastname = $row['user_lastname'];
+                }
+
+                if (!empty($firstname) && !empty($lastname)) {
+
+                    echo "<a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='fa fa-user'></i> $firstname $lastname <b class='caret'></b></a>";
+                } else {
+
+                    echo "<a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='fa fa-user'></i> $username <b class='caret'></b></a>";
+                }
             }
 
             ?>
 
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp;&nbsp;<?php echo $firstname . " " . $lastname ?> <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-user"></i>&nbsp;Profile</a>
+                    <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="../includes/logout.php"><i class="fa fa-fw fa-power-off"></i>&nbsp;Log Out</a>
+                    <a href="../includes/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                 </li>
             </ul>
         </li>

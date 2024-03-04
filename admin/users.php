@@ -1,5 +1,14 @@
 <?php include "includes/admin_header.php" ?>
 
+<?php
+
+if (!isAdmin($_SESSION['username'])) {
+
+    header("Location: profile.php");
+}
+
+?>
+
 <div id="wrapper">
 
     <!-- Navigation -->
@@ -13,35 +22,33 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Welcome to Admin
-                        <small>Author</small>
-                    </h1>
+                        Users
 
-                    <?php
+                        <?php
 
-                    if (isset($_GET['source'])) {
-                        $source = $_GET['source'];
-                    } else {
-                        $source = "";
-                    }
+                        if (isset($_GET['source'])) {
+                            $source = $_GET['source'];
+                        } else {
+                            $source = "";
+                        }
 
-                    switch ($source) {
-                        case 'add_user';
-                            include "includes/users_newUser.php";
-                            break;
+                        switch ($source) {
+                            case 'add_user';
+                                include "includes/users_newUser.php";
+                                break;
 
-                        case 'edit_user';
-                            include "includes/users_editUser.php";
-                            break;
+                            case 'edit_user';
+                                include "includes/users_editUser.php";
+                                break;
 
-                        default:
-                            include "includes/users_viewAll.php";
-                            break;
-                    }
+                            default:
+                                include "includes/users_viewAll.php";
+                                break;
+                        }
 
-                    ?>
+                        ?>
 
-                    <!-- <ol class="breadcrumb">
+                        <!-- <ol class="breadcrumb">
                         <li>
                             <i class="fa fa-dashboard"></i> <a href="index.html">Dashboard</a>
                         </li>

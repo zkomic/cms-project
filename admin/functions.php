@@ -134,3 +134,21 @@ function recordSpecificCount($table, $column, $status)
 
     return $result;
 }
+
+function isAdmin($username) {
+
+    global $connection;
+    $query = "SELECT user_role FROM users WHERE username = '$username'";
+    $user = mysqli_query($connection, $query);
+    queryTest($user);
+
+    $row = mysqli_fetch_array($user);
+
+    if($row['user_role'] == 'admin') {
+
+        return true;
+    } else {
+        
+        return false;
+    }
+}

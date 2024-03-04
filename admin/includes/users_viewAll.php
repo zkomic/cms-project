@@ -1,3 +1,5 @@
+</h1>
+
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -36,16 +38,6 @@
             echo "<td>{$user_email}</td>";
             echo "<td>{$user_role}</td>";
 
-            // $query = "SELECT * FROM posts WHERE post_id = $comment_post_id";
-            // $comment_post = mysqli_query($connection, $query);
-            // queryTest($comment_post);
-
-            // while ($row = mysqli_fetch_assoc($comment_post)) {
-            //     $post_id = $row['post_id'];
-            //     $post_title = $row['post_title'];
-
-            //     echo "<td><a href='../post.php?p_id=$post_id'>{$post_title}</a></td>";
-            // }
             if ($user_role === 'admin') {
 
                 echo "<td><a href='users.php?change_to_subsc={$user_id}'>Make subscriber</a></td>";

@@ -1,10 +1,18 @@
 <?php include "includes/admin_header.php" ?>
 
+<?php
+
+if (!isAdmin($_SESSION['username'])) {
+
+    header("Location: profile.php");
+}
+
+?>
+
 <div id="wrapper">
 
     <!-- Navigation -->
     <?php include "includes/admin_navigation.php" ?>
-
 
     <div id="page-wrapper">
 

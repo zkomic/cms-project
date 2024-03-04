@@ -1,11 +1,17 @@
 <?php include "includes/admin_header.php" ?>
 <?php
 
+$username = '';
+$user_password = '';
+$user_firstname = '';
+$user_lastname = '';
+$user_email = '';
+
 if (isset($_SESSION['username'])) {
 
-    $username = $_SESSION['username'];
+    $session_username = $_SESSION['username'];
 
-    $query = "SELECT * FROM users WHERE username = '{$username}'";
+    $query = "SELECT * FROM users WHERE username = '{$session_username}'";
     $fetch_user = mysqli_query($connection, $query);
     queryTest($fetch_user);
 
@@ -23,7 +29,7 @@ if (isset($_SESSION['username'])) {
 
 ?>
 
-<?php 
+<?php
 
 if (isset($_POST['edit_user'])) {
 
@@ -64,6 +70,7 @@ if (isset($_POST['edit_user'])) {
     queryTest($update_user);
     header("Location: profile.php");
 }
+
 
 ?>
 

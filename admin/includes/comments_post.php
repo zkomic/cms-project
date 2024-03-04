@@ -1,3 +1,7 @@
+<br>
+<small>Post Comments</small>
+</h1>
+
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
