@@ -106,3 +106,31 @@ function deleteCategory()
         header("Location: categories.php");
     }
 }
+
+// Count * from table
+function recordCount($table)
+{
+
+    global $connection;
+    $query = "SELECT * FROM " . $table;
+    $tableCount = mysqli_query($connection, $query);
+    queryTest($tableCount);
+
+    $result = mysqli_num_rows($tableCount);
+
+    return $result;
+}
+
+// Count * from table WHERE
+function recordSpecificCount($table, $column, $status)
+{
+
+    global $connection;
+    $query = "SELECT * FROM " . $table . " WHERE " . $column . "='" . $status . "'";
+    $tableCount = mysqli_query($connection, $query);
+    queryTest($tableCount);
+
+    $result = mysqli_num_rows($tableCount);
+
+    return $result;
+}

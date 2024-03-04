@@ -47,17 +47,9 @@
 
                                     <?php
 
-                                    $query = "SELECT * FROM posts";
-                                    $posts = mysqli_query($connection, $query);
-                                    queryTest($posts);
+                                    $posts_count = recordCount('posts');
 
-                                    $posts_count = mysqli_num_rows($posts);
-
-                                    $query = "SELECT * FROM posts WHERE post_status = 'draft'";
-                                    $posts_draft = mysqli_query($connection, $query);
-                                    queryTest($posts_draft);
-
-                                    $posts_draft_count = mysqli_num_rows($posts_draft);
+                                    $posts_draft_count = recordSpecificCount('posts', 'post_status', 'draft');
                                     $posts_active_count = $posts_count - $posts_draft_count;
 
                                     ?>
@@ -85,20 +77,11 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
 
-
                                     <?php
 
-                                    $query = "SELECT * FROM comments";
-                                    $comments = mysqli_query($connection, $query);
-                                    queryTest($comments);
+                                    $comments_count = recordCount('comments');
 
-                                    $comments_count = mysqli_num_rows($comments);
-
-                                    $query = "SELECT * FROM comments WHERE comment_status = 'approved'";
-                                    $comments_approved = mysqli_query($connection, $query);
-                                    queryTest($comments_approved);
-
-                                    $comments_approved_count = mysqli_num_rows($comments_approved);
+                                    $comments_approved_count = recordSpecificCount('comments', 'comment_status', 'approved');
                                     $comments_unapproved_count = $comments_count - $comments_approved_count;
 
                                     ?>
@@ -128,17 +111,9 @@
 
                                     <?php
 
-                                    $query = "SELECT * FROM users";
-                                    $users = mysqli_query($connection, $query);
-                                    queryTest($users);
+                                    $users_count = recordCount('users');
 
-                                    $users_count = mysqli_num_rows($users);
-
-                                    $query = "SELECT * FROM users WHERE user_role = 'admin'";
-                                    $users_admin = mysqli_query($connection, $query);
-                                    queryTest($users_admin);
-
-                                    $users_admin_count = mysqli_num_rows($users_admin);
+                                    $users_admin_count = recordSpecificCount('users', 'user_role', 'admin');
                                     $users_subs_count = $users_count - $users_admin_count;
 
                                     ?>
@@ -168,11 +143,7 @@
 
                                     <?php
 
-                                    $query = "SELECT * FROM categories";
-                                    $categories = mysqli_query($connection, $query);
-                                    queryTest($categories);
-
-                                    $category_count = mysqli_num_rows($categories);
+                                    $category_count = recordCount('categories');
 
                                     ?>
 

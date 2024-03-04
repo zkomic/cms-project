@@ -29,8 +29,9 @@
 
             // pagination count
             $query = "SELECT * FROM posts WHERE post_status = 'published'";
-            $posts_count = mysqli_query($connection, $query);
-            $posts_count = mysqli_num_rows($posts_count);
+            $publishedPosts = mysqli_query($connection, $query);
+            queryTest($publishedPosts);
+            $posts_count = mysqli_num_rows($publishedPosts);
             $posts_count = ceil($posts_count / $per_page);
 
             $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC LIMIT {$page_1}, {$per_page}";
