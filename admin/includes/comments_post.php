@@ -22,37 +22,30 @@
             $post_id = mysqli_real_escape_string($connection, $get_post_id);
         }
 
-        $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
+        $query = "SELECT c.comment_id, c.comment_author, c.comment_email, c.comment_content, c.comment_status, c.comment_date, ";
+        $query .= "p.post_id, p.post_title ";
+        $query .= "FROM comments c ";
+        $query .= "LEFT JOIN posts p ";
+        $query .= "ON c.comment_post_id = p.post_id ";
+        $query .= "WHERE comment_post_id = {$post_id} ";
+        $query .= "ORDER BY c.comment_id DESC";
         $comments = mysqli_query($connection, $query);
 
         while ($row = mysqli_fetch_assoc($comments)) {
 
             $comment_id = $row['comment_id'];
-            $comment_post_id = $row['comment_post_id'];
             $comment_author = $row['comment_author'];
             $comment_email = $row['comment_email'];
             $comment_content = $row['comment_content'];
             $comment_status = $row['comment_status'];
             $comment_date = $row['comment_date'];
+            $post_id = $row['post_id'];
+            $post_title = $row['post_title'];
 
             echo "<tr>";
             echo "<td>{$comment_id}</td>";
             echo "<td>{$comment_author}</td>";
             echo "<td>{$comment_content}</td>";
-
-            // $query = "SELECT * FROM categories WHERE cat_id = {$post_category_id}";
-            // $category_display = mysqli_query($connection, $query);
-
-            // queryTest($category_display);
-
-            // while ($row = mysqli_fetch_assoc($category_display)) {
-
-            //     $cat_id = $row['cat_id'];
-            //     $cat_title = $row['cat_title'];
-
-            //     echo "<td>{$cat_title}</td>";
-            // }
-
             echo "<td>{$comment_email}</td>";
             if ($comment_status === 'approved') {
 
@@ -62,19 +55,9 @@
                 echo "<td>Unapproved</td>";
             }
 
-            $query = "SELECT * FROM posts WHERE post_id = $comment_post_id";
-            $comment_post = mysqli_query($connection, $query);
-            queryTest($comment_post);
-
-            while ($row = mysqli_fetch_assoc($comment_post)) {
-                $post_id = $row['post_id'];
-                $post_title = $row['post_title'];
-
-                echo "<td><a href='../post.php?p_id=$post_id'>{$post_title}</a></td>";
-            }
-
-
+            echo "<td><a href='../post.php?p_id=$post_id'>{$post_title}</a></td>";
             echo "<td>{$comment_date}</td>";
+
             if ($comment_status === 'approved') {
 
                 echo "<td><a href='comments.php?unapprove={$comment_id}'>Unapprove</a></td>";
@@ -82,6 +65,7 @@
 
                 echo "<td><a href='comments.php?approve={$comment_id}'>Approve</a></td>";
             }
+
             echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this comment?'); \" class='icons' href='comments.php?delete={$comment_id}&post_id={$get_post_id}'><i class='fa fa-trash'></i></a></td>";
             echo "</tr>";
         }
