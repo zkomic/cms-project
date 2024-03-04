@@ -10,10 +10,10 @@
             </button>
             <a class="navbar-brand" href="index.php">CMS Home</a>
         </div>
+
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-
 
                 <?php
 
@@ -22,21 +22,35 @@
 
                 while ($row = mysqli_fetch_assoc($categories)) {
 
+                    $cat_id = $row['cat_id'];
                     $cat_title = $row['cat_title'];
-                    echo "<li><a href='#'>{$cat_title}</a></li>";
+
+                    $category_class = '';
+                    $registration_class = '';
+                    $contact_class = '';
+                    $page_name = basename($_SERVER['PHP_SELF']);
+                    $registration = 'registration.php';
+                    $contact = 'contact.php';
+
+                    if (isset($_GET['category']) && $_GET['category'] == $cat_id) {
+                        $category_class = 'active';
+                    } else if ($page_name == $registration) {
+                        $registration_class = 'active';
+                    } else if ($page_name == $contact) {
+                        $contact_class = 'active';
+                    }
+
+                    echo "<li class='$category_class' ><a href='category.php?category={$cat_id}'>{$cat_title}</a></li>";
                 }
 
                 ?>
-                <li>
-                    <a href="registration.php">Registration</a>
-                </li>
-                <li>
+
+                <li class="<?php echo $contact_class ?>">
                     <a href="contact.php">Contact</a>
                 </li>
 
-                <li>
-                    <a href="admin">Admin</a>
-                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
 
                 <?php
 
@@ -52,7 +66,33 @@
 
                 ?>
 
+                <?php
 
+                if (!isset($_SESSION['username'])) {
+                    echo "<li class='$registration_class'><a href='registration.php'>Registration</a></li>";
+                } else {
+                    $firstname = $_SESSION['firstname'];
+                    $lastname = $_SESSION['lastname'];
+                ?>
+                    <li><a href='admin'>Admin</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp;&nbsp;<?php echo $firstname . " " . $lastname ?> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-user"></i>&nbsp;Profile</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="includes/logout.php"><i class="fa fa-fw fa-power-off"></i>&nbsp;Log Out</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                <?php
+
+                }
+
+                ?>
 
             </ul>
         </div>
