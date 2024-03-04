@@ -46,7 +46,7 @@
 
             //     echo "<td><a href='../post.php?p_id=$post_id'>{$post_title}</a></td>";
             // }
-            if($user_role === 'admin') {
+            if ($user_role === 'admin') {
 
                 echo "<td><a href='users.php?change_to_subsc={$user_id}'>Make subscriber</a></td>";
             } else {
@@ -90,6 +90,14 @@ if (isset($_GET['change_to_subsc'])) {
 }
 
 if (isset($_GET['delete'])) {
+
+    //SQL Injection Protection
+    if (isset($_SESSION['user_role'])) {
+        if ($_SESSION['user_role'] == 'admin') {
+
+            $the_user_id = mysqli_real_escape_string($connection, $_GET['delete']);
+        }
+    }
 
     $delete_user_id = $_GET['delete'];
 
