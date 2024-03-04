@@ -86,14 +86,19 @@ if (isset($_POST['checkBoxArray'])) {
 
             <?php
 
-            $query = "SELECT * FROM posts ORDER BY post_id DESC";
-            //$query = "SELECT * FROM categories LIMIT 2";
+            $query = "SELECT p.post_id, p.post_title, p.post_category_id, p.post_status, p.post_image, p.post_tags, p.post_date, p.post_views_count, ";
+            $query .= "c.cat_id, c.cat_title, u.user_firstname, u.user_lastname ";
+            $query .= "FROM posts p ";
+            $query .= "LEFT JOIN categories c ";
+            $query .= "ON p.post_category_id = c.cat_id ";
+            $query .= "LEFT JOIN users u ";
+            $query .= "ON p.post_user_id = u.user_id ";
+            $query .= "ORDER BY post_id DESC";
             $posts = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_assoc($posts)) {
 
                 $post_id = $row['post_id'];
-                $post_user_id = $row['post_user_id'];
                 $post_title = $row['post_title'];
                 $post_category_id = $row['post_category_id'];
                 $post_status = $row['post_status'];
@@ -101,6 +106,10 @@ if (isset($_POST['checkBoxArray'])) {
                 $post_tags = $row['post_tags'];
                 $post_date = $row['post_date'];
                 $post_views_count = $row['post_views_count'];
+                $cat_title = $row['cat_title'];
+                $cat_id = $row['cat_id'];
+                $user_firstname = $row['user_firstname'];
+                $user_lastname = $row['user_lastname'];
 
                 echo "<tr>";
 
@@ -112,33 +121,9 @@ if (isset($_POST['checkBoxArray'])) {
             <?php
 
                 echo "<td>$post_id</td>";
-
-                $query = "SELECT * FROM users WHERE user_id = {$post_user_id}";
-                $post_author = mysqli_query($connection, $query);
-                queryTest($post_author);
-
-                while ($row = mysqli_fetch_assoc($post_author)) {
-                    $firstname = $row['user_firstname'];
-                    $lastname = $row['user_lastname'];
-                }
-                echo "<td>$firstname $lastname</td>";
-
-
-
+                echo "<td>$user_firstname $user_lastname</td>";
                 echo "<td>{$post_title}</td>";
-
-                $query = "SELECT * FROM categories WHERE cat_id = {$post_category_id}";
-                $category_display = mysqli_query($connection, $query);
-
-                queryTest($category_display);
-
-                while ($row = mysqli_fetch_assoc($category_display)) {
-
-                    $cat_id = $row['cat_id'];
-                    $cat_title = $row['cat_title'];
-
-                    echo "<td>{$cat_title}</td>";
-                }
+                echo "<td>{$cat_title}</td>";
 
                 if ($post_status == 'published') {
 
