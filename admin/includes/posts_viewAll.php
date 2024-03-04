@@ -1,5 +1,7 @@
 <?php
 
+include "delete_modal.php";
+
 if (isset($_POST['checkBoxArray'])) {
 
     foreach ($_POST['checkBoxArray'] as $postValueId) {
@@ -162,12 +164,11 @@ if (isset($_POST['checkBoxArray'])) {
                     echo "<td><a href='comments.php?source=comments_post&post_id=$post_id'>{$comment_count}</a></td>";
                 }
 
-
                 echo "<td>{$post_views_count}</td>";
                 echo "<td>{$post_date}</td>";
                 echo "<td><a class='icons' href='../post.php?p_id={$post_id}'><i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;</a>";
                 echo "<a class='icons' href='posts.php?source=edit_post&p_id={$post_id}'><i class='fa fa-edit'></i>&nbsp;&nbsp;</a>";
-                echo "<a class='icons' onClick=\"javascript: return confirm('Are you sure you want to delete this post?'); \" href='posts.php?delete={$post_id}'><i class='fa fa-trash'></i></a></td>";
+                echo "<a rel='$post_id' class='icons delete-link'><i class='fa fa-trash'></i></a></td>"; //onClick=\"javascript: return confirm('Are you sure you want to delete this post?'); \ href='posts.php?delete={$post_id}'"
                 echo "</tr>";
             }
 
@@ -190,3 +191,17 @@ if (isset($_GET['delete'])) {
 }
 
 ?>
+
+<script>
+    $(document).ready(function() {
+
+        $(".delete-link").on('click', function() {
+
+            var id = $(this).attr("rel");
+            var delete_url = "posts.php?delete=" + id + " ";
+            //alert(delete_url);
+            $(".modal-delete-link").attr("href", delete_url);
+            $("#deleteModal").modal('show');
+        });
+    });
+</script>
