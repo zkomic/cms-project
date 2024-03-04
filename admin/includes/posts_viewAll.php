@@ -93,7 +93,7 @@ if (isset($_POST['checkBoxArray'])) {
             $query .= "ON p.post_category_id = c.cat_id ";
             $query .= "LEFT JOIN users u ";
             $query .= "ON p.post_user_id = u.user_id ";
-            $query .= "ORDER BY post_id DESC";
+            $query .= "ORDER BY p.post_id DESC";
             $posts = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_assoc($posts)) {
