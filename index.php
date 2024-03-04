@@ -33,7 +33,7 @@
             $posts_count = mysqli_num_rows($posts_count);
             $posts_count = ceil($posts_count / $per_page);
 
-            $query = "SELECT * FROM posts WHERE post_status = 'published' LIMIT {$page_1}, {$per_page}";
+            $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC LIMIT {$page_1}, {$per_page}";
             $posts = mysqli_query($connection, $query);
             queryTest($posts);
 
@@ -45,7 +45,7 @@
 
                     $post_id = $row['post_id'];
                     $post_title = $row['post_title'];
-                    $post_author = $row['post_author'];
+                    $post_user_id = $row['post_user_id'];
                     $post_date = $row['post_date'];
                     $post_image = $row['post_image'];
                     $post_cont_tmp = substr($row['post_content'], 0, 250);
@@ -59,7 +59,23 @@
                             <?php echo $post_title; ?>
                         </a>
                     </h2>
-                    <p class="lead">by <a href="author_posts.php?author=<?php echo $post_author; ?>&p_id=<?php echo $post_id; ?>"><?php echo $post_author; ?></a></p>
+
+                    <?php
+
+                    $query = "SELECT * FROM users WHERE user_id = {$post_user_id}";
+                    $author = mysqli_query($connection, $query);
+                    queryTest($author);
+
+                    while ($row = mysqli_fetch_assoc($author)) {
+                        $author_id = $row['user_id'];
+                        $author_firstname = $row['user_firstname'];
+                        $author_lastname = $row['user_lastname'];
+                    }
+
+                    ?>
+
+                    <p class="lead">by <a href="author_posts.php?author=<?php echo $author_id; ?>&p_id=<?php echo $post_id; ?>"><?php echo $author_firstname . " " . $author_lastname ?></a></p>
+
                     <p>
                         <span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date; ?>
                         at 10:00 PM

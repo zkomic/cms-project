@@ -27,7 +27,7 @@
                 while ($row = mysqli_fetch_assoc($posts)) {
 
                     $post_title = $row['post_title'];
-                    $post_author = $row['post_author'];
+                    $post_user_id = $row['post_user_id'];
                     $post_date = $row['post_date'];
                     $post_image = $row['post_image'];
                     $post_content = $row['post_content'];
@@ -38,7 +38,22 @@
                     <h2>
                         <a href="#"><?php echo $post_title ?></a>
                     </h2>
-                    <p class="lead">by <a href="index.php"><?php echo $post_author ?></a></p>
+
+                    <?php
+
+                    $query = "SELECT * FROM users WHERE user_id = {$post_user_id}";
+                    $author = mysqli_query($connection, $query);
+                    queryTest($author);
+
+                    while ($row = mysqli_fetch_assoc($author)) {
+                        $author_id = $row['user_id'];
+                        $author_firstname = $row['user_firstname'];
+                        $author_lastname = $row['user_lastname'];
+                    }
+
+                    ?>
+
+                    <p class="lead">by <a href="author_posts.php?author=<?php echo $author_id; ?>&p_id=<?php echo $post_id; ?>"><?php echo $author_firstname . " " . $author_lastname ?></a></p>
                     <p>
                         <span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?>
                         at 10:00 PM

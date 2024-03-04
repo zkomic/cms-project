@@ -14,24 +14,45 @@
             if (isset($_GET['p_id'])) {
 
                 $get_id = $_GET['p_id'];
-                $get_author = $_GET['author'];
+                $get_author_id = $_GET['author'];
             }
 
-            $query = "SELECT * FROM posts WHERE post_author = '{$get_author}' ";
+            $page = 1;
+            $per_page = 5;
+
+            if (isset($_GET['page'])) {
+
+                $page = $_GET['page'];
+            }
+
+            if ($page == "" || $page == 1) {
+
+                $page_1 = 0;
+            } else {
+
+                $page_1 = ($page * $per_page) - $per_page;
+            }
+
+            // pagination count
+            $query = "SELECT * FROM posts WHERE post_user_id = '{$get_author_id}' AND post_status = 'published'";
+            $posts_count = mysqli_query($connection, $query);
+            $posts_count = mysqli_num_rows($posts_count);
+            $posts_count = ceil($posts_count / $per_page);
+
+            $query = "SELECT * FROM posts WHERE post_user_id = '{$get_author_id}' AND post_status = 'published' ORDER BY post_id DESC LIMIT {$page_1}, {$per_page}";
             $posts = mysqli_query($connection, $query);
+            queryTest($posts);
 
             while ($row = mysqli_fetch_assoc($posts)) {
 
                 $post_id = $row['post_id'];
                 $post_title = $row['post_title'];
-                $post_author = $row['post_author'];
+                $post_user_id = $row['post_user_id'];
                 $post_date = $row['post_date'];
                 $post_image = $row['post_image'];
                 $post_content = $row['post_content'];
 
             ?>
-
-
 
                 <!-- First Blog Post -->
                 <h2>
@@ -63,6 +84,26 @@
     <!-- /.row -->
 
     <hr />
+
+    <!-- Pagination -->
+    <ul class="pager">
+
+        <?php
+
+        for ($i = 1; $i <= $posts_count; $i++) {
+
+            if ($i == $page) {
+
+                echo "<li><a class='active-link' href='author_posts.php?author={$get_author_id}&p_id={$get_id}&page={$i}'>{$i}</a></li>";
+            } else {
+
+                echo "<li><a href='author_posts.php?author={$get_author_id}&p_id={$get_id}&page={$i}'>{$i}</a></li>";
+            }
+        }
+
+        ?>
+
+    </ul>
 
     <!-- Footer -->
     <?php include "includes/footer.php" ?>

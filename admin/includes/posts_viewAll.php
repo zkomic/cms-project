@@ -27,15 +27,15 @@ if (isset($_POST['checkBoxArray'])) {
                     $post_title = $row['post_title'];
                     $post_category_id = $row['post_category_id'];
                     $post_date = $row['post_date'];
-                    $post_author = $row['post_author'];
+                    $post_user_id = $row['post_user_id'];
                     $post_status = $row['post_status'];
                     $post_image = $row['post_image'];
                     $post_tags = $row['post_tags'];
                     $post_content = $row['post_content'];
                 }
 
-                $query = "INSERT INTO posts (post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) ";
-                $query .= "VALUES ({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_status}')";
+                $query = "INSERT INTO posts (post_category_id, post_title, post_user_id, post_date, post_image, post_content, post_tags, post_status) ";
+                $query .= "VALUES ({$post_category_id}, '{$post_title}', '{$post_user_id}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_status}')";
                 $cloned_post = mysqli_query($connection, $query);
                 queryTest($cloned_post);
                 break;
@@ -91,7 +91,7 @@ if (isset($_POST['checkBoxArray'])) {
             while ($row = mysqli_fetch_assoc($posts)) {
 
                 $post_id = $row['post_id'];
-                $post_author = $row['post_author'];
+                $post_user_id = $row['post_user_id'];
                 $post_title = $row['post_title'];
                 $post_category_id = $row['post_category_id'];
                 $post_status = $row['post_status'];
@@ -109,8 +109,20 @@ if (isset($_POST['checkBoxArray'])) {
 
             <?php
 
-                echo "<td>{$post_id}</td>";
-                echo "<td>{$post_author}</td>";
+                echo "<td>$post_id</td>";
+
+                $query = "SELECT * FROM users WHERE user_id = {$post_user_id}";
+                $post_author = mysqli_query($connection, $query);
+                queryTest($post_author);
+
+                while ($row = mysqli_fetch_assoc($post_author)) {
+                    $firstname = $row['user_firstname'];
+                    $lastname = $row['user_lastname'];
+                }
+                echo "<td>$firstname $lastname</td>";
+
+
+
                 echo "<td>{$post_title}</td>";
 
                 $query = "SELECT * FROM categories WHERE cat_id = {$post_category_id}";
@@ -142,24 +154,12 @@ if (isset($_POST['checkBoxArray'])) {
                 queryTest($comment_count_query);
                 $comment_count = mysqli_num_rows($comment_count_query);
 
-                // comment_id fetch
-                $row = mysqli_fetch_array($comment_count_query);
-                if ($row !== null) {
-                    if (is_null($row['comment_id'])) {
-                        $comment_id = 0;
-                    } else {
-                        $comment_id = $row['comment_id'];
-                    }
-                } else {
-                    $comment_id = 0;
-                }
-
                 if ($comment_count == 0) {
 
                     echo "<td>{$comment_count}</td>";
                 } else {
 
-                    echo "<td><a href='comment.php?id=$comment_id'>{$comment_count}</a></td>";
+                    echo "<td><a href='comments.php?source=comments_post&post_id=$post_id'>{$comment_count}</a></td>";
                 }
 
 

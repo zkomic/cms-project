@@ -4,7 +4,7 @@ if (isset($_POST['create_post'])) {
 
     $post_title = $_POST['post_title'];
     $post_category_id = $_POST['post_category_id'];
-    $post_author = $_POST['post_author'];
+    $post_user_id = $_POST['post_user_id'];
     $post_status = $_POST['post_status'];
     //image
     $post_image = $_FILES['post_image']['name'];
@@ -16,8 +16,8 @@ if (isset($_POST['create_post'])) {
 
     move_uploaded_file($post_image_tmp, "../images/$post_image"); //moving img from tmp location to ../images
 
-    $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) ";
-    $query .= "VALUES({$post_category_id},'{$post_title}','{$post_author}', now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}')";
+    $query = "INSERT INTO posts(post_category_id, post_title, post_user_id, post_date, post_image, post_content, post_tags, post_status) ";
+    $query .= "VALUES({$post_category_id},'{$post_title}','{$post_user_id}', now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}')";
 
     $new_post = mysqli_query($connection, $query);
 
@@ -25,14 +25,13 @@ if (isset($_POST['create_post'])) {
     //header("Location: posts.php");
 
     //last id
-    $p_id = mysqli_insert_id($connection); 
+    $p_id = mysqli_insert_id($connection);
 
     echo "
     <div class='alert alert-success'>
         Post created succesfully!<br>
         Click here to <a href='../post.php?p_id={$p_id}'> see post </a> or here to <a href='posts.php'> view all posts.</a>
     </div>";
-
 }
 
 ?>
@@ -51,7 +50,6 @@ if (isset($_POST['create_post'])) {
 
             $query = "SELECT * FROM categories";
             $all_categories = mysqli_query($connection, $query);
-
             queryTest($all_categories);
 
             while ($row = mysqli_fetch_assoc($all_categories)) {
@@ -68,8 +66,27 @@ if (isset($_POST['create_post'])) {
     </div>
 
     <div class="form-group">
-        <label for="post_author">Author</label>
-        <input type="text" class="form-control" name="post_author">
+        <label for="post_user_id">Author</label><br>
+        <select name="post_user_id" id="post_user_id" lass="form-control">
+
+            <?php
+
+            $query = "SELECT * FROM users WHERE user_role = 'admin'";
+            $users = mysqli_query($connection, $query);
+            queryTest($users);
+
+            while ($row = mysqli_fetch_assoc($users)) {
+
+                $user_id = $row['user_id'];
+                $user_firstname = $row['user_firstname'];
+                $user_lastname = $row['user_lastname'];
+
+                echo "<option value='$user_id'>{$user_firstname} {$user_lastname}</option>";
+            }
+
+            ?>
+
+        </select>
     </div>
     <div class="form-group">
         <label for="post_status">Status</label><br>

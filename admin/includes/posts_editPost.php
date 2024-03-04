@@ -11,7 +11,7 @@ $edit_post = mysqli_query($connection, $query);
 while ($row = mysqli_fetch_assoc($edit_post)) {
 
     $post_id = $row['post_id'];
-    $post_author = $row['post_author'];
+    $post_user_id = $row['post_user_id'];
     $post_title = $row['post_title'];
     $post_category_id = $row['post_category_id'];
     $post_status = $row['post_status'];
@@ -23,7 +23,7 @@ while ($row = mysqli_fetch_assoc($edit_post)) {
 
 if (isset($_POST['submit'])) {
 
-    $post_author = $_POST['post_author'];
+    $post_user_id = $_POST['post_user_id'];
     $post_title = $_POST['post_title'];
     $post_category_id = $_POST['post_category_id']; //$_POST['post_category']
     $post_status = $_POST['post_status'];
@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
     $query .= "post_title = '{$post_title}', ";
     $query .= "post_category_id = '{$post_category_id}', ";
     $query .= "post_date = now(), ";
-    $query .= "post_author = '{$post_author}', ";
+    $query .= "post_user_id = '{$post_user_id}', ";
     $query .= "post_status = '{$post_status}', ";
     $query .= "post_tags = '{$post_tags}', ";
     $query .= "post_content = '{$post_content}', ";
@@ -106,10 +106,39 @@ if (isset($_POST['submit'])) {
 
         </select>
     </div>
+
+
     <div class="form-group">
-        <label for="post_author">Author</label>
-        <input type="text" class="form-control" name="post_author" value="<?php echo $post_author; ?>">
+        <label for="post_user_id">Author</label><br>
+        <select name="post_user_id" id="post_user_id" lass="form-control">
+
+            <?php
+
+            $query = "SELECT * FROM users WHERE user_role = 'admin'";
+            $users = mysqli_query($connection, $query);
+            queryTest($users);
+
+            while ($row = mysqli_fetch_assoc($users)) {
+
+                $user_id = $row['user_id'];
+                $user_firstname = $row['user_firstname'];
+                $user_lastname = $row['user_lastname'];
+
+                switch ($post_user_id) {
+                    case $user_id:
+                        echo "<option value='$user_id' selected='selected' >$user_firstname $user_lastname</option>";
+                        break;
+                    default:
+                        echo "<option value='$user_id'>$user_firstname $user_lastname</option>";
+                        break;
+                }
+            }
+
+            ?>
+
+        </select>
     </div>
+
     <div class="form-group">
         <label for="post_status">Status</label><br>
         <select name="post_status" id="post_status">
