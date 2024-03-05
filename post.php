@@ -36,7 +36,7 @@
 
                     <!-- First Blog Post -->
                     <h2>
-                        <a href="#"><?php echo $post_title ?></a>
+                        <?php echo $post_title ?>
                     </h2>
 
                     <?php
@@ -53,13 +53,13 @@
 
                     ?>
 
-                    <p class="lead">by <a href="author_posts.php?author=<?php echo $author_id; ?>&p_id=<?php echo $post_id; ?>"><?php echo $author_firstname . " " . $author_lastname ?></a></p>
+                    <p class="lead">by <a href="/cms-project/author/<?php echo $author_id; ?>/post/<?php echo $post_id; ?>"><?php echo $author_firstname . " " . $author_lastname ?></a></p>
                     <p>
                         <span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?>
                         at 10:00 PM
                     </p>
                     <hr />
-                    <img class="img-responsive" src="images/<?php echo $post_image; ?>" alt="" />
+                    <img class="img-responsive" src="/cms-project/images/<?php echo $post_image; ?>" alt="" />
                     <hr />
                     <p>
                         <?php echo $post_content ?>

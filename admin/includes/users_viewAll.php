@@ -78,7 +78,8 @@ if (isset($_GET['change_to_subsc'])) {
     $changeToSubsc_query = mysqli_query($connection, $query);
     queryTest($changeToSubsc_query);
 
-    redirect("users.php");}
+    redirect("users.php");
+}
 
 if (isset($_GET['delete'])) {
 

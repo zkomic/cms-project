@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if (emailExists($email)) {
 
-        $error['email'] = "User with " . $email . " already exists. Please, <a href='index.php'>login</a>. ";
+        $error['email'] = "User with " . $email . " already exists. Please, <a href='/cms-project/index'>login</a>. ";
     }
 
     foreach ($error as $key => $value) {

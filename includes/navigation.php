@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">CMS Home</a>
+            <a class="navbar-brand" href="/cms-project">CMS Home</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -40,13 +40,13 @@
                         $contact_class = 'active';
                     }
 
-                    echo "<li class='$category_class' ><a href='category.php?category={$cat_id}'>{$cat_title}</a></li>";
+                    echo "<li class='$category_class' ><a href='/cms-project/category/{$cat_id}'>{$cat_title}</a></li>";
                 }
 
                 ?>
 
                 <li class="<?php echo $contact_class ?>">
-                    <a href="contact.php">Contact</a>
+                    <a href="/cms-project/contact">Contact</a>
                 </li>
 
             </ul>
@@ -60,7 +60,7 @@
 
                         $p_id = $_GET['p_id'];
 
-                        echo "<li><a href='admin/posts.php?source=edit_post&p_id={$p_id}'>Edit Post</a></li>";
+                        echo "<li><a href='/cms-project/admin/posts.php?source=edit_post&p_id={$p_id}'>Edit Post</a></li>";
                     }
                 }
 
@@ -70,12 +70,12 @@
 
                 if (!isset($_SESSION['username'])) {
 
-                    echo "<li class='$registration_class'><a href='registration.php'>Registration</a></li>";
+                    echo "<li class='$registration_class'><a href='/cms-project/registration'>Registration</a></li>";
                 } else {
 
                 ?>
 
-                    <li><a href='admin'>Admin</a></li>
+                    <li><a href='/cms-project/admin'>Admin</a></li>
                     <li class="dropdown">
 
                         <?php
@@ -86,11 +86,11 @@
                         
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#"><i class="fa fa-fw fa-user"></i>&nbsp;Profile</a>
+                                <a href="/cms-project/admin/profile.php"><i class="fa fa-fw fa-user"></i>&nbsp;Profile</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="includes/logout.php"><i class="fa fa-fw fa-power-off"></i>&nbsp;Log Out</a>
+                                <a href="/cms-project/includes/logout.php"><i class="fa fa-fw fa-power-off"></i>&nbsp;Log Out</a>
                             </li>
                         </ul>
                     </li>

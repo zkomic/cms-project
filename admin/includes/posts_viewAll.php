@@ -120,7 +120,7 @@ if (isset($_POST['checkBoxArray'])) {
                 <th><input class="checkBox" type="checkbox" name="checkBoxArray[]" value="<?php echo $post_id; ?>"></th>
 
 
-            <?php
+                <?php
 
                 echo "<td>$post_id</td>";
                 echo "<td>$user_firstname $user_lastname</td>";
@@ -155,7 +155,20 @@ if (isset($_POST['checkBoxArray'])) {
                 echo "<td>{$post_date}</td>";
                 echo "<td><a class='icons' href='../post.php?p_id={$post_id}'><i class='fa fa-eye' aria-hidden='true'></i>&nbsp;&nbsp;</a>";
                 echo "<a class='icons' href='posts.php?source=edit_post&p_id={$post_id}'><i class='fa fa-edit'></i>&nbsp;&nbsp;</a>";
-                echo "<a rel='$post_id' class='icons delete-link'><i class='fa fa-trash'></i></a></td>"; //onClick=\"javascript: return confirm('Are you sure you want to delete this post?'); \ href='posts.php?delete={$post_id}'"
+
+                ?>
+                <p><?php echo $post_id ?></p>
+                <form action="" method="post" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                    <input type="hidden" name="post_id" value="<?php echo $post_id ?>">
+
+                    <?php
+                    echo "<td><input class='btn btn-danger' type='submit' name='delete' value='Delete'></td>"
+                    ?>
+
+                </form>
+
+            <?php
+
                 echo "</tr>";
             }
 
@@ -166,9 +179,9 @@ if (isset($_POST['checkBoxArray'])) {
 
 <?php
 
-if (isset($_GET['delete'])) {
+if (isset($_POST['delete'])) {
 
-    $delete_post_id = $_GET['delete'];
+    $delete_post_id = $_POST['post_id'];
 
     $query = "DELETE FROM posts WHERE post_id = {$delete_post_id}";
     $delete_query = mysqli_query($connection, $query);
@@ -191,4 +204,10 @@ if (isset($_GET['delete'])) {
             $("#deleteModal").modal('show');
         });
     });
+</script>
+
+<script>
+    function confirmDelete(postId) {
+        return confirm('Are you sure you want to delete this post?');
+    }
 </script>

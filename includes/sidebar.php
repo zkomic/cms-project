@@ -3,7 +3,7 @@
     <!-- Blog Search Well -->
     <div class="well">
         <h4>Blog Search</h4>
-        <form action="search.php" method="post">
+        <form action="/cms-project/search" method="post">
             <div class="input-group">
                 <input type="text" name="search" class="form-control">
                 <span class="input-group-btn">
@@ -70,7 +70,7 @@
 
                         $cat_id = $row['cat_id'];
                         $cat_title = $row['cat_title'];
-                        echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
+                        echo "<li><a href='/cms-project/category/$cat_id'>{$cat_title}</a></li>";
                     }
                     ?>
 

@@ -28,6 +28,7 @@
 
                     while ($row = mysqli_fetch_assoc($search_query)) {
 
+                        $post_id = $row['post_id'];
                         $post_title = $row['post_title'];
                         $post_user_id = $row['post_user_id'];
                         $post_date = $row['post_date'];
@@ -36,14 +37,12 @@
 
             ?>
 
-                        <h1 class="page-header">
-                            Page Heading
-                            <small>Secondary Text</small>
-                        </h1>
 
                         <!-- First Blog Post -->
                         <h2>
-                            <a href="#"><?php echo $post_title ?></a>
+                            <a href="/cms-project/post/<?php echo $post_id; ?>">
+                                <?php echo $post_title ?>
+                            </a>
                         </h2>
 
                         <?php
@@ -60,19 +59,21 @@
 
                         ?>
 
-                        <p class="lead">by <a href="author_posts.php?author=<?php echo $author_id; ?>&p_id=<?php echo $post_id; ?>"><?php echo $author_firstname . " " . $author_lastname ?></a></p>
+                        <p class="lead">by <a href="/cms-project/author/<?php echo $author_id; ?>/post/<?php echo $post_id; ?>"><?php echo $author_firstname . " " . $author_lastname ?></a></p>
 
                         <p>
                             <span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?>
                             at 10:00 PM
                         </p>
                         <hr />
-                        <img class="img-responsive" src="images/<?php echo $post_image; ?>" alt="" />
+                        <a href="/cms-project/post/<?php echo $post_id; ?>">
+                            <img class="img-responsive" src="/cms-project/images/<?php echo $post_image; ?>" alt="" />
+                        </a>
                         <hr />
                         <p>
                             <?php echo $post_content ?>
                         </p>
-                        <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        <a class="btn btn-primary" href="/cms-project/post/<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                         <hr />
 
