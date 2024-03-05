@@ -1,9 +1,12 @@
 <?php
 
-if (ifMethod('POST')) {
+if (isset($_POST['login'])) {
+
     if (isset($_POST['username']) && isset($_POST['password'])) {
+
         userLogin($_POST['username'], $_POST['password']);
     } else {
+
         redirect("index");
     }
 }
@@ -17,7 +20,7 @@ if (ifMethod('POST')) {
         <h4>Blog Search</h4>
         <form action="/cms-project/search" method="post">
             <div class="input-group">
-                <input type="text" name="search" class="form-control">
+                <input type="text" name="search" class="form-control" required>
                 <span class="input-group-btn">
                     <button class="btn btn-default" name="submit" type="submit">
                         <span class="glyphicon glyphicon-search"></span>
@@ -29,6 +32,8 @@ if (ifMethod('POST')) {
     </div>
 
     <?php
+
+
 
     if (!isset($_SESSION['username'])) {
 
@@ -48,9 +53,9 @@ if (ifMethod('POST')) {
                             <span>Login</span>
                         </button>
                     </span>
-                    <div class="form-group">
-                        <a href="forgotPassword.php?forgot=<?php echo uniqid(true); ?>">Forgot password?</a>
-                    </div>
+                </div>
+                <div class="form-group">
+                    <a href="forgotPassword.php?forgot=<?php echo uniqid(true); ?>">Forgot your password?</a>
                 </div>
             </form>
             <!-- /.input-group -->
