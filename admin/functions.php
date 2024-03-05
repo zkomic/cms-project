@@ -135,7 +135,8 @@ function recordSpecificCount($table, $column, $status)
     return $result;
 }
 
-function isAdmin($username) {
+function isAdmin($username)
+{
 
     global $connection;
     $query = "SELECT user_role FROM users WHERE username = '$username'";
@@ -144,11 +145,35 @@ function isAdmin($username) {
 
     $row = mysqli_fetch_array($user);
 
-    if($row['user_role'] == 'admin') {
+    if ($row['user_role'] == 'admin') {
 
         return true;
     } else {
-        
+
         return false;
+    }
+}
+
+function userLogged($username)
+{
+
+    global $connection;
+
+    $query = "SELECT * FROM users WHERE username = '{$username}'";
+    $logged_user = mysqli_query($connection, $query);
+    queryTest($logged_user);
+
+    while ($row = mysqli_fetch_assoc($logged_user)) {
+
+        $firstname = $row['user_firstname'];
+        $lastname = $row['user_lastname'];
+    }
+
+    if (!empty($firstname) && !empty($lastname)) {
+
+        echo "<a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='fa fa-user'></i> $firstname $lastname <b class='caret'></b></a>";
+    } else {
+
+        echo "<a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='fa fa-user'></i> $username <b class='caret'></b></a>";
     }
 }

@@ -43,7 +43,7 @@ if (isset($_POST['create_post'])) {
 <form action="" method="post" enctype="multipart/form-data"> <!-- enctype="multipart/form-data" za file upload -->
     <div class="form-group">
         <label for="post_title">Post Title</label>
-        <input type="text" class="form-control" name="post_title">
+        <input type="text" class="form-control" name="post_title" required>
     </div>
     <!-- category dropdown -->
     <div class="form-group">
@@ -110,7 +110,7 @@ if (isset($_POST['create_post'])) {
     </div>
     <div class="post-group">
         <label for="post_content">Content</label>
-        <textarea class="form-control" name="post_content" id="summernote" cols="30" rows="10"></textarea>
+        <textarea class="form-control" name="post_content" id="summernote" cols="30" rows="10" required></textarea>
     </div>
     <br>
     <div class="form-group">

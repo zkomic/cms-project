@@ -27,10 +27,10 @@
             <h4>Login</h4>
             <form action="includes/login.php" method="post">
                 <div class="form-group">
-                    <input type="text" name="username" class="form-control" placeholder="Enter username">
+                    <input type="text" name="username" class="form-control" placeholder="Enter username" required>
                 </div>
                 <div class="input-group">
-                    <input type="password" name="password" class="form-control" placeholder="Enter password">
+                    <input type="password" name="password" class="form-control" placeholder="Enter password" required>
                     <span class="input-group-btn">
                         <button class="btn btn-primary" name="login" type="submit">
                             <span>Login</span>

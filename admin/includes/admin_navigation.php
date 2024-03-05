@@ -23,23 +23,7 @@
             if (isset($_SESSION['username'])) {
 
                 $username = $_SESSION['username'];
-                $query = "SELECT * FROM users WHERE username = '{$username}'";
-                $logged_user = mysqli_query($connection, $query);
-                queryTest($logged_user);
-
-                while ($row = mysqli_fetch_assoc($logged_user)) {
-
-                    $firstname = $row['user_firstname'];
-                    $lastname = $row['user_lastname'];
-                }
-
-                if (!empty($firstname) && !empty($lastname)) {
-
-                    echo "<a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='fa fa-user'></i> $firstname $lastname <b class='caret'></b></a>";
-                } else {
-
-                    echo "<a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='fa fa-user'></i> $username <b class='caret'></b></a>";
-                }
+                userLogged($username);
             }
 
             ?>

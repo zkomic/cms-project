@@ -19,8 +19,6 @@ if (isset($_POST['create_user'])) {
     //$post_image_tmp = $_FILES['post_image']['tmp_name']; //tmp location
     //move_uploaded_file($post_image_tmp, "../images/$post_image"); //moving img from tmp location to ../images
 
-    echo $password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));
-
     $query = "INSERT INTO users(user_firstname, user_lastname, user_role, username, user_email, user_password) ";
     $query .= "VALUES('{$user_firstname}','{$user_lastname}','{$user_role}','{$username}','{$user_email}','{$password}')";
 
@@ -57,15 +55,15 @@ if (isset($_POST['create_user'])) {
     </div>
     <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" class="form-control" name="username">
+        <input type="text" class="form-control" name="username" required>
     </div>
     <div class="form-group">
         <label for="user_email">E-mail</label>
-        <input type="text" class="form-control" name="user_email">
+        <input type="text" class="form-control" name="user_email" required>
     </div>
     <div class="form-group">
         <label for="user_password">Password</label>
-        <input type="text" class="form-control" name="user_password">
+        <input type="text" class="form-control" name="user_password" required>
     </div>
     <!-- <div class="from-group">
         <label for="post_image">Image</label>

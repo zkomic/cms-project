@@ -41,13 +41,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (empty($value)) {
 
             unset($error[$key]);
-            userLogin($username, $password);
         }
     }
 
-    if(empty($error)) {
+    if (empty($error)) {
 
         userRegistration($username, $email, $password);
+        userLogin($username, $password);
     }
 } else {
 
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             } else if (!empty($error['empty'])) {
 
                                 echo "<div class='alert alert-danger' role='alert'>{$error['empty']}</div>";
-                            } 
+                            }
                             ?>
 
                             <div class="form-group">

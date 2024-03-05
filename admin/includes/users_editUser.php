@@ -107,11 +107,11 @@ if (isset($_GET['user_id'])) {
     </div>
     <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" class="form-control" name="username" value="<?php echo $username ?>">
+        <input type="text" class="form-control" name="username" value="<?php echo $username ?>" required>
     </div>
     <div class="form-group">
         <label for="user_email">E-mail</label>
-        <input type="text" class="form-control" name="user_email" value="<?php echo $user_email ?>">
+        <input type="text" class="form-control" name="user_email" value="<?php echo $user_email ?>" required>
     </div>
     <div class="form-group">
         <label for="user_password">Password</label>

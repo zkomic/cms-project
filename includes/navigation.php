@@ -69,14 +69,21 @@
                 <?php
 
                 if (!isset($_SESSION['username'])) {
+
                     echo "<li class='$registration_class'><a href='registration.php'>Registration</a></li>";
                 } else {
-                    $firstname = $_SESSION['firstname'];
-                    $lastname = $_SESSION['lastname'];
+
                 ?>
+
                     <li><a href='admin'>Admin</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp;&nbsp;<?php echo $firstname . " " . $lastname ?> <b class="caret"></b></a>
+
+                        <?php
+
+                        userLogged($_SESSION['username']);
+
+                        ?>
+                        
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="#"><i class="fa fa-fw fa-user"></i>&nbsp;Profile</a>
@@ -87,6 +94,12 @@
                             </li>
                         </ul>
                     </li>
+
+                    <?php
+
+
+                    ?>
+
 
                 <?php
 

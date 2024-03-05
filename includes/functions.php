@@ -102,10 +102,34 @@ function userLogin($username, $password)
         $_SESSION['lastname'] = $db_lastname;
         $_SESSION['role'] = $db_role;
 
-        redirect("../admin");
+        redirect("/cms-project/admin");
     } else {
 
         $_SESSION['username'] = $db_username;
-        redirect("admin/profile.php");
+        redirect("index.php");
+    }
+}
+
+function userLogged($username)
+{
+
+    global $connection;
+
+    $username = $_SESSION['username'];
+    $query = "SELECT user_firstname, user_lastname FROM users WHERE username = '$username'";
+    $logged_user = mysqli_query($connection, $query);
+    queryTest($logged_user);
+
+    while ($row = mysqli_fetch_assoc($logged_user)) {
+
+        $firstname = $row['user_firstname'];
+        $lastname = $row['user_lastname'];
+        if (!empty($username) && !empty($lastname)) {
+
+            echo "<a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='fa fa-user'></i>&nbsp;&nbsp; $firstname $lastname <b class='caret'></b></a>";
+        } else {
+
+            echo "<a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='fa fa-user'></i>&nbsp;&nbsp; $username <b class='caret'></b></a>";
+        }
     }
 }
