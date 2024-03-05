@@ -62,7 +62,6 @@ if (isset($_POST['submit'])) {
 
     $update_post = mysqli_query($connection, $query);
     queryTest($update_post);
-    //header("Location: posts.php");
 
     echo "
     <div class='alert alert-success'>

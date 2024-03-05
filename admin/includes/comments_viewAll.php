@@ -78,7 +78,7 @@ if (isset($_GET['approve'])) {
     $query = "UPDATE comments SET comment_status = 'approved'";
     $query .= "WHERE comment_id = $comment_id";
     $approve_query = mysqli_query($connection, $query);
-    header("Location: comments.php");
+    redirect("comments.php");
 
     queryTest($approve_query);
 }
@@ -91,7 +91,7 @@ if (isset($_GET['unapprove'])) {
     $query = "UPDATE comments SET comment_status = 'unapproved'";
     $query .= "WHERE comment_id = $comment_id";
     $unapprove_query = mysqli_query($connection, $query);
-    header("Location: comments.php");
+    redirect("comments.php");
 
     queryTest($unapprove_query);
 }
@@ -102,7 +102,7 @@ if (isset($_GET['delete'])) {
 
     $query = "DELETE FROM comments WHERE comment_id = {$delete_comment_id}";
     $delete_query = mysqli_query($connection, $query);
-    header("Location: comments.php");
+    redirect("comments.php");
 
     queryTest($delete_query);
 }

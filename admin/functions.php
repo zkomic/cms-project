@@ -1,5 +1,11 @@
 <?php
 
+function redirect($location)
+{
+
+    return header("Location: " . $location);
+}
+
 function usersOnline()
 {
 
@@ -103,7 +109,7 @@ function deleteCategory()
 
         $query = "DELETE FROM categories WHERE cat_id = {$delete_cat_id}";
         $delete_category = mysqli_query($connection, $query);
-        header("Location: categories.php");
+        redirect("categories.php");
     }
 }
 

@@ -65,7 +65,7 @@ if (isset($_GET['change_to_admin'])) {
     $changeToAdmin_query = mysqli_query($connection, $query);
     queryTest($changeToAdmin_query);
 
-    header("Location: users.php");
+    redirect("users.php");
 }
 
 
@@ -78,8 +78,7 @@ if (isset($_GET['change_to_subsc'])) {
     $changeToSubsc_query = mysqli_query($connection, $query);
     queryTest($changeToSubsc_query);
 
-    header("Location: users.php");
-}
+    redirect("users.php");}
 
 if (isset($_GET['delete'])) {
 
@@ -97,7 +96,7 @@ if (isset($_GET['delete'])) {
     $delete_query = mysqli_query($connection, $query);
     queryTest($delete_query);
 
-    header("Location: users.php");
+    redirect("users.php");
 }
 
 ?>

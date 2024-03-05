@@ -52,7 +52,7 @@ if (isset($_GET['user_id'])) {
         // }
 
         if ($db_password != $user_password) {
-            echo $user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));
+            $user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));
         }
 
         $query = "UPDATE users SET ";
@@ -67,11 +67,11 @@ if (isset($_GET['user_id'])) {
 
         $update_user = mysqli_query($connection, $query);
         queryTest($update_user);
-        header("Location: users.php");
+        redirect("users.php");
     }
 } else { //no user_id in url
 
-    header("Location: index.php");
+    redirect("index.php");
 }
 
 ?>

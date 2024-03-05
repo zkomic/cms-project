@@ -4,7 +4,7 @@
 
 if (!isAdmin($_SESSION['username'])) {
 
-    header("Location: profile.php");
+    redirect("profile.php");
 }
 
 ?>

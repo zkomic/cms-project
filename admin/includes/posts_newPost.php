@@ -26,7 +26,6 @@ if (isset($_POST['create_post'])) {
     $new_post = mysqli_query($connection, $query);
 
     queryTest($new_post);
-    //header("Location: posts.php");
 
     //last id
     $p_id = mysqli_insert_id($connection);

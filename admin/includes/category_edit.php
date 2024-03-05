@@ -38,7 +38,7 @@
 
             $query = "UPDATE categories SET cat_title = '{$edit_cat_title}' WHERE cat_id = {$cat_id}";
             $update_category = mysqli_query($connection, $query);
-            header("Location: categories.php");
+            redirect("categories.php");
 
             queryTest($update_category);
         }

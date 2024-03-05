@@ -70,7 +70,7 @@
             } else {
 
                 // if there is no post_id, redirect to home page
-                header("Location: index.php");
+                redirect("index.php");
             }
 
             ?>
@@ -101,7 +101,7 @@
                 }
 
                 // removes data when reloading after submit
-                header("Location: post.php?p_id=$post_id");
+                redirect("post.php?p_id=$post_id");
             }
 
 

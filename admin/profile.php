@@ -68,7 +68,7 @@ if (isset($_POST['edit_user'])) {
 
     $update_user = mysqli_query($connection, $query);
     queryTest($update_user);
-    header("Location: profile.php");
+    redirect("profile.php");
 }
 
 
