@@ -1,4 +1,4 @@
-<?php include "functions.php" ?>
+<?php include "includes/functions.php" ?>
 <?php session_start() ?>
 
 <!DOCTYPE html>

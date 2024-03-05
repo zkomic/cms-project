@@ -2,7 +2,6 @@
 
 function queryTest($result)
 {
-
     global $connection;
     if (!$result) {
         die("Query failed: " . mysqli_error($connection));
@@ -11,14 +10,28 @@ function queryTest($result)
 
 function redirect($location)
 {
-
-    return header("Location: " . $location);
+    header("Location: " . $location);
+    exit;
 }
 
+function ifMethod($method = null)
+{
+    if ($_SERVER['REQUEST_METHOD'] == strtoupper($method)) {
+        return true;
+    }
+    return false;
+}
+
+function isLoggedIn()
+{
+    if (isset($_SESSION['username'])) {
+        return true;
+    }
+    return false;
+}
 
 function usernameExists($username)
 {
-
     global $connection;
 
     $query = "SELECT username FROM users WHERE username = '$username'";
@@ -36,7 +49,6 @@ function usernameExists($username)
 
 function emailExists($email)
 {
-
     global $connection;
 
     $query = "SELECT user_email FROM users WHERE user_email = '$email'";
@@ -54,7 +66,6 @@ function emailExists($email)
 
 function userRegistration($username, $email, $password)
 {
-
     global $connection;
 
     $username = mysqli_real_escape_string($connection, $username);
@@ -74,7 +85,6 @@ function userRegistration($username, $email, $password)
 
 function userLogin($username, $password)
 {
-
     global $connection;
 
     $username = mysqli_real_escape_string($connection, $username);
@@ -92,27 +102,25 @@ function userLogin($username, $password)
         $db_username = $row['username'];
         $db_password = $row['user_password'];
         $db_role = $row['user_role'];
+
+        // https://www.php.net/manual/en/function.password-verify.php
+        if (password_verify($password, $db_password)) {
+
+            $_SESSION['username'] = $db_username;
+            $_SESSION['firstname'] = $db_firstname;
+            $_SESSION['lastname'] = $db_lastname;
+            $_SESSION['role'] = $db_role;
+
+            redirect("/cms-project/admin");
+        } else {
+            return false;
+        }
     }
-
-    // https://www.php.net/manual/en/function.password-verify.php
-    if (password_verify($password, $db_password)) {
-
-        $_SESSION['username'] = $db_username;
-        $_SESSION['firstname'] = $db_firstname;
-        $_SESSION['lastname'] = $db_lastname;
-        $_SESSION['role'] = $db_role;
-
-        redirect("/cms-project/admin");
-    } else {
-
-        $_SESSION['username'] = $db_username;
-        redirect("index.php");
-    }
+    return true;
 }
 
-function userLogged($username)
+function userLoggedNavigation($username)
 {
-
     global $connection;
 
     $username = $_SESSION['username'];

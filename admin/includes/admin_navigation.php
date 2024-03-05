@@ -23,7 +23,7 @@
             if (isset($_SESSION['username'])) {
 
                 $username = $_SESSION['username'];
-                userLogged($username);
+                userLoggedNavigation($username);
             }
 
             ?>

@@ -11,9 +11,8 @@
 
             <?php
 
-            if (isset($_GET['p_id'])) {
+            if (isset($_GET['author'])) {
 
-                $get_id = $_GET['p_id'];
                 $get_author_id = $_GET['author'];
             }
 
@@ -97,10 +96,10 @@
 
             if ($i == $page) {
 
-                echo "<li><a class='active-link' href='author_posts.php?author={$get_author_id}&p_id={$get_id}&page={$i}'>{$i}</a></li>";
+                echo "<li><a class='active-link' href='author_posts.php?author={$get_author_id}&page={$i}'>{$i}</a></li>";
             } else {
 
-                echo "<li><a href='author_posts.php?author={$get_author_id}&p_id={$get_id}&page={$i}'>{$i}</a></li>";
+                echo "<li><a href='author_posts.php?author={$get_author_id}&page={$i}'>{$i}</a></li>";
             }
         }
 

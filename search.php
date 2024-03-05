@@ -59,8 +59,7 @@
 
                         ?>
 
-                        <p class="lead">by <a href="/cms-project/author/<?php echo $author_id; ?>/post/<?php echo $post_id; ?>"><?php echo $author_firstname . " " . $author_lastname ?></a></p>
-
+                        <p class="lead">by <a href="/cms-project/author/<?php echo $author_id; ?>"><?php echo $author_firstname . " " . $author_lastname ?></a></p>
                         <p>
                             <span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?>
                             at 10:00 PM

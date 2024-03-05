@@ -27,10 +27,12 @@
 
                     $category_class = '';
                     $registration_class = '';
+                    $login_class = '';
                     $contact_class = '';
                     $page_name = basename($_SERVER['PHP_SELF']);
                     $registration = 'registration.php';
                     $contact = 'contact.php';
+                    $login = 'login.php';
 
                     if (isset($_GET['category']) && $_GET['category'] == $cat_id) {
                         $category_class = 'active';
@@ -38,6 +40,8 @@
                         $registration_class = 'active';
                     } else if ($page_name == $contact) {
                         $contact_class = 'active';
+                    } else if ($page_name == $login) {
+                        $login_class = 'active';
                     }
 
                     echo "<li class='$category_class' ><a href='/cms-project/category/{$cat_id}'>{$cat_title}</a></li>";
@@ -71,6 +75,7 @@
                 if (!isset($_SESSION['username'])) {
 
                     echo "<li class='$registration_class'><a href='/cms-project/registration'>Registration</a></li>";
+                    echo "<li class='$login_class'><a href='/cms-project/login'>Login</a></li>";
                 } else {
 
                 ?>
@@ -80,10 +85,10 @@
 
                         <?php
 
-                        userLogged($_SESSION['username']);
+                        userLoggedNavigation($_SESSION['username']);
 
                         ?>
-                        
+
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="/cms-project/admin/profile.php"><i class="fa fa-fw fa-user"></i>&nbsp;Profile</a>

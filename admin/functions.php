@@ -2,13 +2,12 @@
 
 function redirect($location)
 {
-
-    return header("Location: " . $location);
+    header("Location: " . $location);
+    exit;
 }
 
 function usersOnline()
 {
-
     if (isset($_GET['onlineUsers'])) {
 
         global $connection;
@@ -44,7 +43,6 @@ usersOnline();
 
 function queryTest($result)
 {
-
     global $connection;
     if (!$result) {
         die("Query failed: " . mysqli_error($connection));
@@ -53,7 +51,6 @@ function queryTest($result)
 
 function findAllCategories()
 {
-
     global $connection;
     $query = "SELECT * FROM categories";
     //$query = "SELECT * FROM categories LIMIT 2";
@@ -74,7 +71,6 @@ function findAllCategories()
 
 function newCategory()
 {
-
     global $connection;
     if (isset($_POST['submit'])) {
 
@@ -101,7 +97,6 @@ function newCategory()
 
 function deleteCategory()
 {
-
     global $connection;
     if (isset($_GET['delete'])) {
 
@@ -116,7 +111,6 @@ function deleteCategory()
 // Count * from table
 function recordCount($table)
 {
-
     global $connection;
     $query = "SELECT * FROM " . $table;
     $tableCount = mysqli_query($connection, $query);
@@ -130,7 +124,6 @@ function recordCount($table)
 // Count * from table WHERE
 function recordSpecificCount($table, $column, $status)
 {
-
     global $connection;
     $query = "SELECT * FROM " . $table . " WHERE " . $column . "='" . $status . "'";
     $tableCount = mysqli_query($connection, $query);
@@ -143,7 +136,6 @@ function recordSpecificCount($table, $column, $status)
 
 function isAdmin($username)
 {
-
     global $connection;
     $query = "SELECT user_role FROM users WHERE username = '$username'";
     $user = mysqli_query($connection, $query);
@@ -154,15 +146,12 @@ function isAdmin($username)
     if ($row['user_role'] == 'admin') {
 
         return true;
-    } else {
-
-        return false;
     }
+    return false;
 }
 
-function userLogged($username)
+function userLoggedNavigation($username)
 {
-
     global $connection;
 
     $query = "SELECT * FROM users WHERE username = '{$username}'";
