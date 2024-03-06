@@ -1,0 +1,58 @@
+CREATE TABLE `categories` (
+  `cat_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cat_title` varchar(255) NOT NULL,
+  PRIMARY KEY (`cat_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+Query results operations
+
+CREATE TABLE `comments` (
+  `comment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `comment_post_id` int(11) NOT NULL,
+  `comment_author` varchar(255) NOT NULL,
+  `comment_email` varchar(255) NOT NULL,
+  `comment_content` text NOT NULL,
+  `comment_status` varchar(255) NOT NULL,
+  `comment_date` date NOT NULL,
+  PRIMARY KEY (`comment_id`),
+  KEY `FK` (`comment_post_id`),
+  CONSTRAINT `FK` FOREIGN KEY (`comment_post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+
+CREATE TABLE `posts` (
+  `post_id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_category_id` int(11) NOT NULL,
+  `post_title` varchar(255) NOT NULL,
+  `post_author` varchar(255) NOT NULL,
+  `post_user_id` int(11) NOT NULL,
+  `post_date` date NOT NULL,
+  `post_image` text NOT NULL,
+  `post_content` text NOT NULL,
+  `post_tags` varchar(255) NOT NULL,
+  `post_status` varchar(255) NOT NULL DEFAULT 'draft',
+  `post_views_count` int(11) NOT NULL,
+  PRIMARY KEY (`post_id`),
+  KEY `FK_cat` (`post_category_id`),
+  KEY `FK_user` (`post_user_id`),
+  CONSTRAINT `FK_cat` FOREIGN KEY (`post_category_id`) REFERENCES `categories` (`cat_id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_user` FOREIGN KEY (`post_user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `user_password` varchar(255) NOT NULL,
+  `user_firstname` varchar(255) NOT NULL,
+  `user_lastname` varchar(255) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `user_image` text NOT NULL,
+  `user_role` varchar(255) NOT NULL,
+  `token` text NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+
+CREATE TABLE `users_online` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `session` varchar(255) NOT NULL,
+  `time` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci

@@ -157,7 +157,6 @@ if (isset($_POST['checkBoxArray'])) {
                 echo "<a class='icons' href='posts.php?source=edit_post&p_id={$post_id}'><i class='fa fa-edit'></i>&nbsp;&nbsp;</a>";
 
                 ?>
-                <p><?php echo $post_id ?></p>
                 <form action="" method="post" onsubmit="return confirm('Are you sure you want to delete this post?');">
                     <input type="hidden" name="post_id" value="<?php echo $post_id ?>">
 

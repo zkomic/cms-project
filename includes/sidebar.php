@@ -55,7 +55,7 @@ if (isset($_POST['login'])) {
                     </span>
                 </div>
                 <div class="form-group">
-                    <a href="forgotPassword.php?forgot=<?php echo uniqid(true); ?>">Forgot your password?</a>
+                    <a href="password_forgot.php?forgot=<?php echo uniqid(true); ?>">Forgot your password?</a>
                 </div>
             </form>
             <!-- /.input-group -->

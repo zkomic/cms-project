@@ -1,3 +1,18 @@
+<?php
+echo '<script type="text/javascript">';
+echo 'function disableNavigation(){ 
+    var admin = document.querySelectorAll("#admin"); 
+    for (var i = 0; i < admin.length; i++) {
+        admin[i].classList.add("disabled");
+    }
+};';
+echo '</script>';
+
+if (!isAdmin($_SESSION['username'])) {
+    echo '<body onload="disableNavigation()">';
+}
+?>
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -42,10 +57,10 @@
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-            <li>
+            <li id="admin">
                 <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
-            <li>
+            <li id="admin">
                 <a href="javascript:;" data-toggle="collapse" data-target="#posts">
                     <i class="fa fa-fw fa-arrows-v"></i> Posts <i class="fa fa-fw fa-caret-down"></i>
                 </a>
@@ -58,10 +73,10 @@
                     </li>
                 </ul>
             </li>
-            <li>
+            <li id="admin">
                 <a href="./categories.php"><i class="fa fa-fw fa-wrench"></i> Categories </a>
             </li>
-            <li>
+            <li id="admin">
                 <a href="javascript:;" data-toggle="collapse" data-target="#demo">
                     <i class="fa fa-fw fa-arrows-v"></i> Users <i class="fa fa-fw fa-caret-down"></i>
                 </a>
@@ -74,7 +89,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="">
+            <li id="admin">
                 <a href="comments.php"><i class="fa fa-fw fa-file"></i> Comments </a>
             </li>
             <li>
