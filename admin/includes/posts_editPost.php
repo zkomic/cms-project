@@ -165,7 +165,7 @@ if (isset($_POST['submit'])) {
     <div class="form-group">
         <div class="from-group">
             <label for="post_image">Image</label><br>
-            <img width=200 src="../images/<?php echo $post_image; ?>" alt=""><br><br>
+            <img width=200 src="../images/<?php echo imagePlaceholder($post_image); ?>" alt=""><br><br>
             <input type="file" name="post_image">
         </div>
         <br>

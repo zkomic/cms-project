@@ -133,8 +133,10 @@ if (isset($_POST['checkBoxArray'])) {
                 } else {
 
                     echo "<td>Draft</td>";
-                }
-                echo "<td><img width='100' src='../images/$post_image' alt='image'></td>";
+                } ?>
+                <td><img width="100" src="/cms-project/images/<?php echo imagePlaceholder($post_image); ?>" alt=""></td>
+                <?php
+
                 echo "<td>{$post_tags}</td>";
 
                 // comment counter

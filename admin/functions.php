@@ -172,3 +172,12 @@ function userLoggedNavigation($username)
         echo "<a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='fa fa-user'></i> $username <b class='caret'></b></a>";
     }
 }
+
+function imagePlaceholder($image = '') {
+
+    if(!$image) {
+        return 'default.png';
+    } else {
+        return $image;
+    }
+}
