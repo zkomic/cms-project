@@ -64,13 +64,13 @@
 
             if ($comment_status === 'approved') {
 
-                echo "<td><a href='comments.php?unapprove={$comment_id}'>Unapprove</a></td>";
+                echo "<td><a href='comments.php?source=comments_post&post_id={$post_id}&unapprove={$comment_id}'>Unapprove</a></td>";
             } else {
 
-                echo "<td><a href='comments.php?approve={$comment_id}'>Approve</a></td>";
+                echo "<td><a href='comments.php?source=comments_post&post_id={$post_id}&approve={$comment_id}'>Approve</a></td>";
             }
 
-            echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this comment?'); \" class='icons' href='comments.php?delete={$comment_id}&post_id={$get_post_id}'><i class='fa fa-trash'></i></a></td>";
+            echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this comment?'); \" class='icons' href='comments.php?source=comments_post&post_id={$post_id}&delete={$comment_id}'><i class='fa fa-trash'></i></a></td>";
             echo "</tr>";
         }
 
@@ -87,7 +87,7 @@ if (isset($_GET['approve'])) {
     $query = "UPDATE comments SET comment_status = 'approved' ";
     $query .= "WHERE comment_id = $comment_id";
     $approve_query = mysqli_query($connection, $query);
-    redirect("comments.php");
+    redirect("comments.php?source=comments_post&post_id=$post_id");
 
     queryTest($approve_query);
 }
@@ -100,8 +100,7 @@ if (isset($_GET['unapprove'])) {
     $query = "UPDATE comments SET comment_status = 'unapproved' ";
     $query .= "WHERE comment_id = $comment_id";
     $unapprove_query = mysqli_query($connection, $query);
-    redirect("comments.php");
-
+    redirect("comments.php?source=comments_post&post_id=$post_id");
     queryTest($unapprove_query);
 }
 
@@ -113,7 +112,6 @@ if (isset($_GET['delete'])) {
     $delete_query = mysqli_query($connection, $query);
     queryTest($delete_query);
 
-    redirect("comments.php");
-}
+    redirect("comments.php?source=comments_post&post_id=$post_id");}
 
 ?>

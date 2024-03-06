@@ -44,7 +44,6 @@ CREATE TABLE `users` (
   `user_firstname` varchar(255) NOT NULL,
   `user_lastname` varchar(255) NOT NULL,
   `user_email` varchar(255) NOT NULL,
-  `user_image` text NOT NULL,
   `user_role` varchar(255) NOT NULL,
   `token` text NOT NULL,
   PRIMARY KEY (`user_id`)

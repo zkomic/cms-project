@@ -6,6 +6,14 @@ function redirect($location)
     exit;
 }
 
+function isLoggedIn()
+{
+    if (isset($_SESSION['username'])) {
+        return true;
+    }
+    return false;
+}
+
 function usersOnline()
 {
     if (isset($_GET['onlineUsers'])) {
@@ -53,7 +61,6 @@ function findAllCategories()
 {
     global $connection;
     $query = "SELECT * FROM categories";
-    //$query = "SELECT * FROM categories LIMIT 2";
     $categories = mysqli_query($connection, $query);
 
     while ($row = mysqli_fetch_assoc($categories)) {

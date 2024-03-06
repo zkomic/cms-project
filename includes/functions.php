@@ -150,3 +150,4 @@ function imagePlaceholder($image = '') {
         return $image;
     }
 }
+

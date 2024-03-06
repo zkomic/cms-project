@@ -20,7 +20,6 @@ if (isset($_GET['user_id'])) {
         $user_firstname = $row['user_firstname'];
         $user_lastname = $row['user_lastname'];
         $user_email = $row['user_email'];
-        $user_image = $row['user_image'];
         $user_role = $row['user_role'];
     }
 
@@ -33,37 +32,20 @@ if (isset($_GET['user_id'])) {
         $username = $_POST['username'];
         $user_email = $_POST['user_email'];
         $user_password = $_POST['user_password'];
-        //$user_date = date('d-m-y');
-
-        //image
-        //$post_image = $_FILES['post_image']['name'];
-        //$post_image_tmp = $_FILES['post_image']['tmp_name']; //tmp location
-        //move_uploaded_file($post_image_tmp, "../images/$post_image"); //moving img from tmp location to ../images
-
-        // fetch image from db so that is not empty after editing
-        // if (empty($post_image)) {
-
-        //     $query = "SELECT * FROM posts WHERE post_id = {$p_id} ";
-        //     $fetch_image = mysqli_query($connection, $query);
-
-        //     while ($row = mysqli_fetch_assoc($fetch_image)) {
-        //         $post_image = $row['post_image'];
-        //     }
-        // }
-
-        if ($db_password != $user_password) {
-            $user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));
-        }
 
         $query = "UPDATE users SET ";
         $query .= "user_firstname = '{$user_firstname}', ";
         $query .= "user_lastname = '{$user_lastname}', ";
         $query .= "user_role = '{$user_role}', ";
         $query .= "username = '{$username}', ";
-        $query .= "user_email = '{$user_email}', ";
-        $query .= "user_password = '{$user_password}' ";
-        //$query .= "post_image = '{$post_image}' ";
-        $query .= "WHERE user_id = {$user_id} ";
+        $query .= "user_email = '{$user_email}'";
+
+        if (!empty($user_password) && $db_password != $user_password) {
+            $user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));
+            $query .= ", user_password = '{$user_password}'";
+        }
+
+        $query .= " WHERE user_id = {$user_id}";
 
         $update_user = mysqli_query($connection, $query);
         queryTest($update_user);
@@ -117,10 +99,6 @@ if (isset($_GET['user_id'])) {
         <label for="user_password">Password</label>
         <input type="password" class="form-control" name="user_password" autocomplete="off" placeholder="New password...">
     </div>
-    <!-- <div class="from-group">
-        <label for="post_image">Image</label>
-        <input type="file" name="post_image">
-    </div> -->
     <br>
     <div class="form-group">
         <input class="btn btn-primary" type="submit" name="edit_user" value="Update User">

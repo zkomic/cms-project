@@ -27,7 +27,6 @@
             $user_firstname = $row['user_firstname'];
             $user_lastname = $row['user_lastname'];
             $user_email = $row['user_email'];
-            $user_image = $row['user_image'];
             $user_role = $row['user_role'];
 
             echo "<tr>";
@@ -46,7 +45,11 @@
                 echo "<td><a href='users.php?change_to_admin={$user_id}'>Make admin</a></td>";
             }
             echo "<td><a class='icons' href='users.php?source=edit_user&user_id={$user_id}'><i class='fa fa-edit'></i>&nbsp;&nbsp;</a>";
-            echo "<a class='icons' onClick=\"javascript: return confirm('Are you sure you want to delete this user?'); \" href='users.php?delete={$user_id}'><i class='fa fa-trash'></i></a></td>";
+
+            if ($username !== $_SESSION['username']) {
+
+                echo "<a class='icons' onClick=\"javascript: return confirm('Are you sure you want to delete this user?'); \" href='users.php?delete={$user_id}'><i class='fa fa-trash'></i></a></td>";
+            }
             echo "</tr>";
         }
 

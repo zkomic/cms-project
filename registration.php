@@ -50,8 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         userLogin($username, $password);
     }
 } else {
-
-    $message_error = "";
 }
 
 ?>

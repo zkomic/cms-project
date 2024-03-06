@@ -102,7 +102,7 @@
                 }
 
                 // removes data when reloading after submit
-                redirect("post.php?p_id=$post_id");
+                redirect("$post_id");
             }
 
 

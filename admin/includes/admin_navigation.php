@@ -35,10 +35,9 @@ if (!isAdmin($_SESSION['username'])) {
 
             <?php
 
-            if (isset($_SESSION['username'])) {
+            if (isLoggedIn()) {
 
-                $username = $_SESSION['username'];
-                userLoggedNavigation($username);
+                userLoggedNavigation($_SESSION['username']);
             }
 
             ?>
