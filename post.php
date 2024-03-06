@@ -59,7 +59,8 @@
                         at 10:00 PM
                     </p>
                     <hr />
-                    <img class="img-responsive" src="/cms-project/images/<?php echo $post_image; ?>" alt="" />
+                    <img class="img-responsive" src="/cms-project/images/<?php echo imagePlaceholder($post_image); ?>" alt="" />
+
                     <hr />
                     <p>
                         <?php echo $post_content ?>

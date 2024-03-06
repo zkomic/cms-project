@@ -66,7 +66,7 @@
                         </p>
                         <hr />
                         <a href="/cms-project/post/<?php echo $post_id; ?>">
-                            <img class="img-responsive" src="/cms-project/images/<?php echo $post_image; ?>" alt="" />
+                            <img class="img-responsive" src="/cms-project/images/<?php echo imagePlaceholder($post_image); ?>" alt="" />
                         </a>
                         <hr />
                         <p>

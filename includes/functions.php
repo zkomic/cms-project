@@ -141,3 +141,12 @@ function userLoggedNavigation($username)
         }
     }
 }
+
+function imagePlaceholder($image = '') {
+
+    if(!$image) {
+        return 'default.png';
+    } else {
+        return $image;
+    }
+}
